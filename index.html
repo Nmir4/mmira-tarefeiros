@@ -15,6 +15,7 @@
   --red:#e05555;--red-bg:#1f0f0f;
   --yellow:#d4a843;--yellow-bg:#1e1800;
   --blue:#5b8dee;--blue-bg:#0f1628;
+  --orange:#e07820;--orange-bg:#1e1208;
   --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
   --r:8px;--r2:12px;--r3:16px;
 }
@@ -32,10 +33,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .login-logo{font-size:20px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
 .login-logo span{color:var(--muted);font-weight:300}
 .login-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
-.login-box .field{margin-bottom:13px}
-.login-box label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
-.login-box input{width:100%;padding:10px 13px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
-.login-box input:focus{outline:none;border-color:var(--accent)}
+.lf{margin-bottom:13px}
+.lf label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.lf input{width:100%;padding:10px 13px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
+.lf input:focus{outline:none;border-color:var(--accent)}
 .login-err{color:var(--red);font-size:12px;margin-top:8px;min-height:18px}
 
 #app{display:none;flex-direction:column;height:100vh}
@@ -43,20 +44,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .topbar{display:flex;align-items:center;gap:10px;padding:0 16px;height:50px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
 .logo{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
 .logo span{color:var(--muted);font-weight:400}
-.user-badge{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.user-badge strong{color:var(--text);font-weight:500}
+.user-badge{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px}
 .role-pill{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .role-admin{background:var(--accent-bg);color:var(--accent)}
 .role-worker{background:var(--blue-bg);color:var(--blue)}
-.nav{display:flex;gap:1px;background:var(--surface);border-bottom:1px solid var(--border);padding:0 12px;flex-shrink:0;overflow-x:auto}
+.nav{display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 12px;flex-shrink:0;overflow-x:auto}
 .nav::-webkit-scrollbar{display:none}
 .nav-btn{padding:10px 13px;border:none;background:none;color:var(--muted);font-family:var(--font);font-size:13px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;position:relative}
 .nav-btn:hover{color:var(--text)}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
-.notif-dot{position:absolute;top:7px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red)}
-.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:880px;width:100%;margin:0 auto}
-
+.notif-dot{position:absolute;top:7px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:900px;width:100%;margin:0 auto}
 .view{display:none}.view.active{display:block}
+
 .page-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
 .page-title{font-size:17px;font-weight:600}
 .page-title small{font-size:12px;color:var(--muted);font-weight:400;display:block;margin-top:1px}
@@ -64,28 +64,91 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r);border:none;font-family:var(--font);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-decoration:none;white-space:nowrap}
 .btn-primary{background:var(--accent);color:#0f0f0f}.btn-primary:hover{background:#d9bb80}
 .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid #3a1818}.btn-danger:hover{background:#2a1010}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid #3a1818}
 .btn-green{background:var(--green-bg);color:var(--green);border:1px solid #1a3a22}
 .btn-wa{background:#0d2010;color:#4caf6e;border:1px solid #1a4020}.btn-wa:hover{background:#122818}
+.btn-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid #3a2e00}
+.btn-orange{background:var(--orange-bg);color:var(--orange);border:1px solid #3a2010}
 .btn-sm{padding:5px 11px;font-size:12px}
-.btn-xs{padding:3px 9px;font-size:11px}
+.btn-xs{padding:3px 8px;font-size:11px}
 
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
 .badge-green{background:var(--green-bg);color:var(--green)}
 .badge-red{background:var(--red-bg);color:var(--red)}
 .badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
 .badge-blue{background:var(--blue-bg);color:var(--blue)}
 .badge-gray{background:var(--surface2);color:var(--muted)}
 .badge-accent{background:var(--accent-bg);color:var(--accent)}
+.badge-orange{background:var(--orange-bg);color:var(--orange)}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px;cursor:default}
-.stat-val{font-size:24px;font-weight:700;font-family:var(--mono);color:var(--accent)}
+.section-lbl{font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:20px 0 10px}
+
+/* ── DASHBOARD ── */
+.dash-today{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r3);overflow:hidden;margin-bottom:16px}
+.dash-today-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dash-today-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:4px}
+.dash-today-name{font-size:18px;font-weight:700}
+.dash-today-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.dash-today-meta span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.dash-colabs{padding:0 18px}
+.dash-colab-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
+.dash-colab-row:last-child{border-bottom:none}
+.dash-colab-name{font-weight:600;font-size:13px;flex:1;min-width:0}
+.dash-colab-meet{font-size:11px;color:var(--muted);margin-top:1px}
+.dash-colab-actions{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s}
+.week-card:hover{border-color:var(--border2)}
+.week-date-box{width:44px;height:44px;background:var(--surface2);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.week-day{font-size:18px;font-weight:700;font-family:var(--mono);color:var(--accent);line-height:1}
+.week-month{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:1px}
+.week-info{flex:1;min-width:0}
+.week-name{font-weight:600;font-size:13px}
+.week-loc{font-size:12px;color:var(--muted);margin-top:1px}
+.week-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+
+.alert-card{border-radius:var(--r2);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.alert-warn{background:#1e1600;border:1px solid #3a2a00}
+.alert-info{background:var(--blue-bg);border:1px solid #1a2a50}
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px}
+.stat-val{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--accent)}
 .stat-lbl{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
 
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:10px}
-.section-lbl{font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 10px}
+/* ── SERVICE CARD ── */
+.svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:10px;overflow:hidden}
+.svc-head{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.svc-date{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:500;margin-bottom:3px}
+.svc-deceased{font-weight:700;font-size:15px}
+.svc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
+.svc-meta span{font-size:12px;color:var(--muted)}
+.svc-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;align-items:flex-start}
+.svc-divider{height:1px;background:var(--border);margin:0 16px}
+.svc-body{padding:11px 16px;display:flex;flex-wrap:wrap;gap:6px}
 
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;background:var(--surface2);border:1px solid var(--border)}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot-g{background:var(--green)}.dot-y{background:var(--yellow)}.dot-r{background:var(--red)}.dot-d{background:var(--dim)}.dot-o{background:var(--orange)}
+
+/* ── WORKER CARD ── */
+.w-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:8px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--accent);flex-shrink:0}
+.w-info{flex:1;min-width:0}
+.w-name{font-weight:600}
+.w-meta{font-size:12px;color:var(--muted);margin-top:2px;display:flex;flex-wrap:wrap;gap:8px}
+.w-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+
+/* ── PAYMENT ── */
+.pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:10px}
+.pay-row:last-child{border-bottom:none}
+.pay-info{flex:1}
+.pay-name{font-weight:600}
+.pay-detail{font-size:12px;color:var(--muted);margin-top:1px}
+.pay-amt{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--red)}
+.pay-amt.ok{color:var(--green)}
+
+/* ── MODALS ── */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;align-items:center;justify-content:center;padding:16px}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r3);width:100%;max-width:500px;max-height:92vh;overflow-y:auto}
@@ -100,76 +163,48 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
 .field input,.field select,.field textarea{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-.field textarea{min-height:72px;resize:vertical}
+.field textarea{min-height:70px;resize:vertical}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .field-hint{font-size:11px;color:var(--dim);margin-top:4px}
 
-/* SERVICE CARD */
-.svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:10px;overflow:hidden}
-.svc-head{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.svc-deceased{font-weight:700;font-size:15px;color:var(--text)}
-.svc-date{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:4px;font-weight:500}
-.svc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
-.svc-meta-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.svc-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;align-items:flex-start}
-.svc-divider{height:1px;background:var(--border);margin:0 16px}
-.svc-body{padding:11px 16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+/* ── COLAB MEET EDITOR ── */
+.colab-meet-row{padding:12px 0;border-bottom:1px solid var(--border)}
+.colab-meet-row:last-child{border-bottom:none}
+.colab-meet-name{font-weight:600;font-size:13px;margin-bottom:8px}
+.colab-meet-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.colab-meet-fields input{width:100%;padding:7px 10px;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:13px}
+.colab-meet-fields input:focus{outline:none;border-color:var(--accent)}
 
-.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;background:var(--surface2);border:1px solid var(--border)}
-.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.dot-g{background:var(--green)}.dot-y{background:var(--yellow)}.dot-r{background:var(--red)}.dot-d{background:var(--dim)}
-
-/* WORKER CARD */
-.w-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:8px}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--accent);flex-shrink:0}
-.w-info{flex:1;min-width:0}
-.w-name{font-weight:600}
-.w-meta{font-size:12px;color:var(--muted);margin-top:2px;display:flex;flex-wrap:wrap;gap:8px}
-.w-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
-
-/* PAYMENT */
-.pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:10px}
-.pay-row:last-child{border-bottom:none}
-.pay-info{flex:1}
-.pay-name{font-weight:600}
-.pay-detail{font-size:12px;color:var(--muted);margin-top:1px}
-.pay-amt{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--red)}
-.pay-amt.ok{color:var(--green)}
-
-/* REQUEST */
-.req-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px}
-.req-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
-.req-msg{font-size:13px;background:var(--surface2);padding:10px 12px;border-radius:var(--r);line-height:1.6;margin-bottom:8px}
-
-/* WORKER PORTAL */
-.my-svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
-.my-svc-name{font-weight:700;font-size:15px;margin-bottom:4px}
-.my-svc-meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
-
+/* ── WA / REQUESTS ── */
 .wa-preview{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:13px;font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
 .wa-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
 .wa-row:last-child{border-bottom:none}
+.req-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px}
+.req-msg{font-size:13px;background:var(--surface2);padding:10px 12px;border-radius:var(--r);line-height:1.6;margin:8px 0}
 
-.empty{text-align:center;padding:40px 20px;color:var(--muted)}
-.empty-icon{font-size:32px;margin-bottom:10px;opacity:.35}
+/* ── WORKER PORTAL ── */
+.my-svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
 
-.toast{position:fixed;bottom:20px;right:16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 16px;border-radius:var(--r);font-size:13px;z-index:9999;transform:translateY(70px);opacity:0;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.5);pointer-events:none}
-.toast.show{transform:translateY(0);opacity:1}
-
-/* TABLE */
+/* ── TABLE ── */
 .tbl{width:100%;border-collapse:collapse}
 .tbl th{text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
 .tbl td{padding:10px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
 
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:10px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-icon{font-size:32px;margin-bottom:10px;opacity:.35}
+.toast{position:fixed;bottom:20px;right:16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 16px;border-radius:var(--r);font-size:13px;z-index:9999;transform:translateY(70px);opacity:0;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.5);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
 @media(max-width:600px){
   .topbar{padding:0 12px}.content{padding:14px 12px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .field-row,.field-row3{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .field-row,.field-row3,.colab-meet-fields{grid-template-columns:1fr}
   .page-hd{flex-direction:column;align-items:flex-start}
   .svc-head{flex-direction:column}
-  .svc-actions{flex-direction:row}
+  .dash-today-head{flex-direction:column}
 }
 </style>
 </head>
@@ -184,8 +219,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   <div class="login-box">
     <div class="login-logo">MIRA <span>· Tarefeiros</span></div>
     <div class="login-sub">Agência Funerária Mira — Melgaço</div>
-    <div class="field"><label>Email</label><input type="email" id="l-email" autocomplete="username"></div>
-    <div class="field"><label>Password</label><input type="password" id="l-pass" autocomplete="current-password"></div>
+    <div class="lf"><label>Email</label><input type="email" id="l-email" autocomplete="username"></div>
+    <div class="lf"><label>Password</label><input type="password" id="l-pass" autocomplete="current-password"></div>
     <div class="login-err" id="l-err"></div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="doLogin()">Entrar</button>
   </div>
@@ -195,25 +230,23 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   <header class="topbar">
     <div class="logo">MIRA <span>· Tarefeiros</span></div>
     <div class="user-badge">
-      <strong id="ub-name"></strong>
+      <strong id="ub-name" style="font-size:13px"></strong>
       <span class="role-pill" id="ub-role"></span>
       <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sair</button>
     </div>
   </header>
-
   <nav class="nav" id="nav-admin" style="display:none">
     <button class="nav-btn active" onclick="showTab('dash')">Início</button>
     <button class="nav-btn" onclick="showTab('workers')">Pessoas</button>
     <button class="nav-btn" onclick="showTab('services')">Serviços</button>
     <button class="nav-btn" onclick="showTab('payments')">Pagamentos</button>
-    <button class="nav-btn" id="req-tab-btn" onclick="showTab('requests')">Pedidos<span class="notif-dot" id="req-dot" style="display:none"></span></button>
+    <button class="nav-btn" onclick="showTab('requests')">Pedidos<span class="notif-dot" id="req-dot" style="display:none"></span></button>
   </nav>
   <nav class="nav" id="nav-worker" style="display:none">
     <button class="nav-btn active" onclick="showTab('my-services')">Os meus serviços</button>
     <button class="nav-btn" onclick="showTab('my-payments')">Pagamentos</button>
     <button class="nav-btn" onclick="showTab('my-requests')">Pedido</button>
   </nav>
-
   <main class="content">
     <div id="tab-dash" class="view active"></div>
     <div id="tab-workers" class="view"></div>
@@ -229,11 +262,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 <!-- MODAL: Tarefeiro -->
 <div class="overlay" id="m-worker">
   <div class="modal">
-    <div class="modal-hd"><div class="modal-title" id="m-worker-title">Novo Tarefeiro</div><button class="x-btn" onclick="closeM('m-worker')">×</button></div>
+    <div class="modal-hd"><div class="modal-title" id="m-worker-title">Novo Colaborador</div><button class="x-btn" onclick="closeM('m-worker')">×</button></div>
     <div class="modal-body">
       <div class="field"><label>Nome completo</label><input id="wf-name" type="text"></div>
-      <div class="field"><label>Email (usado para login)</label><input id="wf-email" type="email"></div>
-      <div class="field" id="wf-pass-wrap"><label>Password inicial</label><input id="wf-pass" type="text" autocomplete="new-password"><div class="field-hint">Mínimo 6 caracteres. O colaborador pode alterar depois.</div></div>
+      <div class="field"><label>Email (login)</label><input id="wf-email" type="email"></div>
+      <div class="field" id="wf-pass-wrap"><label>Password inicial</label><input id="wf-pass" type="text" autocomplete="new-password"><div class="field-hint">Mínimo 6 caracteres</div></div>
       <div class="field"><label>Telemóvel</label><input id="wf-phone" type="tel" placeholder="+351 9XX XXX XXX"></div>
       <div class="field-row">
         <div class="field"><label>Localidade</label><input id="wf-loc" type="text"></div>
@@ -265,15 +298,30 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
         <div class="field"><label>Hora do funeral</label><input id="sf-funeral" type="time"></div>
         <div class="field"><label>Valor por colaborador</label><input id="sf-value" type="number" min="0" step="0.5" value="30"><div class="field-hint">Default: 30€</div></div>
       </div>
-      <div class="field"><label>Notas internas</label><textarea id="sf-notes" placeholder="Informações adicionais (não enviadas via WhatsApp)..."></textarea></div>
+      <div class="field"><label>Notas internas</label><textarea id="sf-notes" placeholder="Não visível na mensagem WhatsApp"></textarea></div>
       <div class="field">
         <label>Colaboradores convocados</label>
-        <div id="sf-workers" style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);padding:4px 8px"></div>
+        <div id="sf-workers" style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);padding:4px 8px"></div>
       </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeM('m-service')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveService()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Encontro por colaborador -->
+<div class="overlay" id="m-meet">
+  <div class="modal modal-lg">
+    <div class="modal-hd"><div class="modal-title" id="m-meet-title">Hora e local de encontro</div><button class="x-btn" onclick="closeM('m-meet')">×</button></div>
+    <div class="modal-body">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Define hora e local de encontro para cada colaborador. Pode ser atualizado a qualquer momento.</div>
+      <div id="m-meet-body"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeM('m-meet')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveMeetData()">Guardar</button>
     </div>
   </div>
 </div>
@@ -328,12 +376,13 @@ const fbConfig = {
 firebase.initializeApp(fbConfig);
 const auth = firebase.auth();
 const db   = firebase.firestore();
+const FS   = firebase.firestore.FieldValue;
 
 const ADMIN_EMAIL = 'nicolaumira@gmail.com';
 
-let currentUser = null, isAdmin = false, currentTab = 'dash';
-let editingWorkerId = null, editingServiceId = null, resolvingRequestId = null;
-let workers = [], services = [], payments = [], requests = [];
+let currentUser=null, isAdmin=false, currentTab='dash';
+let editingWorkerId=null, editingServiceId=null, meetServiceId=null, resolvingRequestId=null;
+let workers=[], services=[], payments=[], requests=[];
 let unsubWorkers, unsubServices, unsubPayments, unsubRequests;
 
 // ── UTILS ──────────────────────────────────────────────────────────────────
@@ -344,6 +393,14 @@ const toast    = (msg,dur=2600) => { const t=document.getElementById('toast'); t
 const openM    = id => document.getElementById(id).classList.add('open');
 const closeM   = id => document.getElementById(id).classList.remove('open');
 const workerById = id => workers.find(w=>w.id===id);
+const svcValue = s => parseFloat(s.value)||30;
+
+function subOneHour(t) {
+  if (!t) return '';
+  const [h,m]=t.split(':').map(Number);
+  const d=new Date(2000,0,1,h,m); d.setHours(d.getHours()-1);
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
 
 // ── AUTH ───────────────────────────────────────────────────────────────────
 auth.onAuthStateChanged(async user => {
@@ -351,62 +408,62 @@ auth.onAuthStateChanged(async user => {
     currentUser = user;
     try {
       const adminDoc = await db.doc('config/admin').get();
-      isAdmin = adminDoc.exists ? adminDoc.data().adminUid === user.uid : user.email === ADMIN_EMAIL;
-      if (!adminDoc.exists && user.email === ADMIN_EMAIL)
-        await db.doc('config/admin').set({ adminUid: user.uid, adminEmail: user.email });
-    } catch(e) { isAdmin = user.email === ADMIN_EMAIL; }
+      isAdmin = adminDoc.exists ? adminDoc.data().adminUid===user.uid : user.email===ADMIN_EMAIL;
+      if (!adminDoc.exists && user.email===ADMIN_EMAIL)
+        await db.doc('config/admin').set({adminUid:user.uid,adminEmail:user.email});
+    } catch(e) { isAdmin = user.email===ADMIN_EMAIL; }
     showApp();
-  } else { currentUser = null; isAdmin = false; showLogin(); }
+  } else { currentUser=null; isAdmin=false; showLogin(); }
 });
 
 function showLogin() {
-  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display='none';
   document.getElementById('login-screen').classList.add('visible');
   document.getElementById('app').classList.remove('visible');
 }
 function showApp() {
-  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display='none';
   document.getElementById('login-screen').classList.remove('visible');
   document.getElementById('app').classList.add('visible');
-  const name = currentUser.displayName || currentUser.email.split('@')[0];
-  document.getElementById('ub-name').textContent = name;
-  const rp = document.getElementById('ub-role');
-  rp.textContent = isAdmin ? 'Admin' : 'Colaborador';
-  rp.className = 'role-pill ' + (isAdmin ? 'role-admin' : 'role-worker');
-  document.getElementById('nav-admin').style.display = isAdmin ? 'flex' : 'none';
-  document.getElementById('nav-worker').style.display = isAdmin ? 'none' : 'flex';
+  const name=currentUser.displayName||currentUser.email.split('@')[0];
+  document.getElementById('ub-name').textContent=name;
+  const rp=document.getElementById('ub-role');
+  rp.textContent=isAdmin?'Admin':'Colaborador';
+  rp.className='role-pill '+(isAdmin?'role-admin':'role-worker');
+  document.getElementById('nav-admin').style.display=isAdmin?'flex':'none';
+  document.getElementById('nav-worker').style.display=isAdmin?'none':'flex';
   setupListeners();
-  showTab(isAdmin ? 'dash' : 'my-services');
+  showTab(isAdmin?'dash':'my-services');
 }
 async function doLogin() {
-  const email = document.getElementById('l-email').value.trim();
-  const pass  = document.getElementById('l-pass').value;
-  document.getElementById('l-err').textContent = '';
-  if (!email || !pass) { document.getElementById('l-err').textContent = 'Preenche email e password.'; return; }
-  try { await auth.signInWithEmailAndPassword(email, pass); }
+  const email=document.getElementById('l-email').value.trim();
+  const pass=document.getElementById('l-pass').value;
+  document.getElementById('l-err').textContent='';
+  if(!email||!pass){document.getElementById('l-err').textContent='Preenche email e password.';return;}
+  try { await auth.signInWithEmailAndPassword(email,pass); }
   catch(e) {
-    const m = {'auth/user-not-found':'Email não encontrado.','auth/wrong-password':'Password incorreta.',
+    const m={'auth/user-not-found':'Email não encontrado.','auth/wrong-password':'Password incorreta.',
       'auth/invalid-email':'Email inválido.','auth/invalid-credential':'Credenciais inválidas.',
-      'auth/too-many-requests':'Demasiadas tentativas. Aguarda uns minutos.'};
-    document.getElementById('l-err').textContent = m[e.code] || 'Erro ao entrar.';
+      'auth/too-many-requests':'Demasiadas tentativas.'};
+    document.getElementById('l-err').textContent=m[e.code]||'Erro ao entrar.';
   }
 }
 function doLogout() {
   [unsubWorkers,unsubServices,unsubPayments,unsubRequests].forEach(u=>u&&u());
   auth.signOut();
 }
-document.getElementById('l-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('l-email').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('l-pass').focus(); });
+document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('l-email').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('l-pass').focus();});
 
 // ── LISTENERS ──────────────────────────────────────────────────────────────
 function setupListeners() {
-  unsubWorkers  = db.collection('workers').orderBy('name').onSnapshot(s => { workers = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
-  unsubServices = db.collection('services').orderBy('date','desc').onSnapshot(s => { services = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
-  unsubPayments = db.collection('payments').onSnapshot(s => { payments = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
+  unsubWorkers  = db.collection('workers').orderBy('name').onSnapshot(s=>{workers=s.docs.map(d=>({id:d.id,...d.data()}));renderCurrent();});
+  unsubServices = db.collection('services').orderBy('date','desc').onSnapshot(s=>{services=s.docs.map(d=>({id:d.id,...d.data()}));renderCurrent();});
+  unsubPayments = db.collection('payments').onSnapshot(s=>{payments=s.docs.map(d=>({id:d.id,...d.data()}));renderCurrent();});
   if (isAdmin) {
-    unsubRequests = db.collection('requests').orderBy('createdAt','desc').onSnapshot(s => {
-      requests = s.docs.map(d=>({id:d.id,...d.data()}));
-      document.getElementById('req-dot').style.display = requests.filter(r=>r.status==='pending').length > 0 ? 'block' : 'none';
+    unsubRequests=db.collection('requests').orderBy('createdAt','desc').onSnapshot(s=>{
+      requests=s.docs.map(d=>({id:d.id,...d.data()}));
+      document.getElementById('req-dot').style.display=requests.filter(r=>r.status==='pending').length>0?'block':'none';
       renderCurrent();
     });
   }
@@ -414,118 +471,218 @@ function setupListeners() {
 
 // ── NAV ────────────────────────────────────────────────────────────────────
 function showTab(tab) {
-  currentTab = tab;
+  currentTab=tab;
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('tab-'+tab)?.classList.add('active');
-  const navMap = {'dash':0,'workers':1,'services':2,'payments':3,'requests':4,'my-services':0,'my-payments':1,'my-requests':2};
-  const nav = document.getElementById(isAdmin?'nav-admin':'nav-worker');
+  const navMap={'dash':0,'workers':1,'services':2,'payments':3,'requests':4,'my-services':0,'my-payments':1,'my-requests':2};
+  const nav=document.getElementById(isAdmin?'nav-admin':'nav-worker');
   nav.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===navMap[tab]));
   renderCurrent();
 }
 function renderCurrent() {
-  if (!currentUser) return;
+  if(!currentUser) return;
   ({dash:renderDash,workers:renderWorkers,services:renderServices,payments:renderPayments,
-    requests:renderRequests,'my-services':renderMyServices,'my-payments':renderMyPayments,'my-requests':renderMyRequests})[currentTab]?.();
+    requests:renderRequests,'my-services':renderMyServices,'my-payments':renderMyPayments,
+    'my-requests':renderMyRequests})[currentTab]?.();
 }
 
 // ── PAYMENT HELPERS ────────────────────────────────────────────────────────
-function svcValue(s) { return parseFloat(s.value) || 30; }
 function calcDebt(workerId) {
-  let owed = 0;
-  services.forEach(s => { if((s.workers||[]).some(sw=>sw.id===workerId&&sw.attended)) owed += svcValue(s); });
-  const paid = payments.filter(p=>p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
-  return Math.max(0, Math.round((owed - paid)*100)/100);
+  let owed=0;
+  services.forEach(s=>{if((s.workers||[]).some(sw=>sw.id===workerId&&sw.attended))owed+=svcValue(s);});
+  const paid=payments.filter(p=>p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
+  return Math.max(0,Math.round((owed-paid)*100)/100);
 }
 
-// ── SERVICE CARD ───────────────────────────────────────────────────────────
-function svcCard(s, showValue=false) {
-  const val = svcValue(s);
-  return `<div class="svc">
-    <div class="svc-head">
-      <div style="flex:1;min-width:0">
-        <div class="svc-date">${fmtDate(s.date)}</div>
-        <div class="svc-deceased">${s.deceased||'Serviço sem nome'}</div>
-        <div class="svc-meta">
-          ${s.location?`<span class="svc-meta-item">📍 ${s.location}</span>`:''}
-          ${s.depositTime?`<span class="svc-meta-item">⚰️ Depósito ${s.depositTime}</span>`:''}
-          ${s.funeralTime?`<span class="svc-meta-item">🕐 Funeral ${s.funeralTime}</span>`:''}
-          ${showValue&&val?`<span class="svc-meta-item" style="color:var(--accent);font-weight:600">💶 ${val}€/colab.</span>`:''}
-        </div>
-      </div>
-      <div class="svc-actions">
-        <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')">WA</button>
-        <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
-        <button class="btn btn-ghost btn-sm" onclick="openServiceModal('${s.id}')">✎</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteSvc('${s.id}')">✕</button>
-      </div>
-    </div>
-    <div class="svc-divider"></div>
-    <div class="svc-body">
-      ${(s.workers||[]).length ? (s.workers).map(sw=>statusChip(sw)).join('') : '<span style="color:var(--dim);font-size:12px">Sem colaboradores convocados</span>'}
-    </div>
-  </div>`;
-}
-
+// ── STATUS CHIP ────────────────────────────────────────────────────────────
 function statusChip(sw) {
-  const name = workerById(sw.id)?.name?.split(' ')[0]||'?';
-  if(sw.attended) return `<span class="chip"><span class="dot dot-g"></span>${name} <span style="color:var(--green);font-size:11px;margin-left:2px">✓</span></span>`;
-  if(sw.confirmed) return `<span class="chip"><span class="dot dot-y"></span>${name} <span style="color:var(--yellow);font-size:11px;margin-left:2px">conf.</span></span>`;
+  const name=workerById(sw.id)?.name?.split(' ')[0]||'?';
+  if(sw.attended)   return `<span class="chip"><span class="dot dot-g"></span>${name}<span style="color:var(--green);font-size:10px;margin-left:2px">✓</span></span>`;
+  if(sw.unavailable)return `<span class="chip"><span class="dot dot-r"></span><span style="color:var(--muted)">${name}</span></span>`;
+  if(sw.confirmed)  return `<span class="chip"><span class="dot dot-y"></span>${name}</span>`;
   return `<span class="chip"><span class="dot dot-d"></span>${name}</span>`;
 }
 
 // ── DASHBOARD ──────────────────────────────────────────────────────────────
 function renderDash() {
-  const totalDebt = workers.reduce((a,w)=>a+calcDebt(w.id),0);
-  const totalPaid = payments.filter(p=>p.paid).reduce((a,p)=>a+p.amount,0);
-  const pending   = requests.filter(r=>r.status==='pending').length;
-  const recent    = services.slice(0,5);
-  const debtors   = workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
+  const today = new Date().toISOString().slice(0,10);
+  const inSevenDays = new Date(Date.now()+7*86400000).toISOString().slice(0,10);
+
+  const todaySvcs  = services.filter(s=>s.date===today);
+  const nextSvc    = services.filter(s=>s.date>today).slice(-1)[0]; // services ordered desc, so last is next
+  const weekSvcs   = services.filter(s=>s.date>today&&s.date<=inSevenDays).reverse();
+  const featured   = todaySvcs.length ? todaySvcs : (nextSvc?[nextSvc]:[]);
+
+  // Alerts: convocados sem confirmação
+  const unconfirmed = [];
+  services.filter(s=>s.date>=today).forEach(s=>{
+    (s.workers||[]).forEach(sw=>{
+      if(!sw.confirmed&&!sw.attended&&!sw.unavailable){
+        const w=workerById(sw.id);
+        if(w) unconfirmed.push({worker:w,service:s,sw});
+      }
+    });
+  });
+
+  const totalDebt=workers.reduce((a,w)=>a+calcDebt(w.id),0);
+  const now=new Date();
+  const monthStart=new Date(now.getFullYear(),now.getMonth(),1).toISOString().slice(0,10);
+  const monthSvcs=services.filter(s=>s.date>=monthStart).length;
+  const monthPaid=payments.filter(p=>p.paid&&p.paidAt?.toDate&&p.paidAt.toDate()>=new Date(monthStart)).reduce((a,p)=>a+p.amount,0);
+  const pending=requests.filter(r=>r.status==='pending').length;
+
   document.getElementById('tab-dash').innerHTML = `
     <div class="page-hd">
       <div class="page-title">Painel Geral</div>
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Colaboradores</div></div>
-      <div class="stat"><div class="stat-val">${services.length}</div><div class="stat-lbl">Serviços</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--red)">${totalDebt}€</div><div class="stat-lbl">Em dívida</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--green)">${totalPaid}€</div><div class="stat-lbl">Pago total</div></div>
-      ${pending>0?`<div class="stat" style="cursor:pointer" onclick="showTab('requests')"><div class="stat-val" style="color:var(--yellow)">${pending}</div><div class="stat-lbl">Pedidos pendentes</div></div>`:''}
-    </div>
-    <div class="section-lbl">Serviços recentes</div>
-    ${recent.length ? recent.map(s=>svcCard(s,true)).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços ainda.</p></div>'}
-    ${debtors.length?`<div class="section-lbl">Dívidas pendentes</div><div class="card">${debtors.map(({w,d})=>`
-      <div class="pay-row">
-        <div class="pay-info"><div class="pay-name">${w.name}</div><div class="pay-detail">${w.phone||''}</div></div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="pay-amt">${d}€</div>
-          <button class="btn btn-primary btn-sm" onclick="markAllPaid('${w.id}')">Pagar</button>
+
+    ${featured.length ? featured.map(s=>{
+      const label = s.date===today ? 'Hoje' : `Próximo · ${fmtDate(s.date)}`;
+      return `<div class="dash-today">
+        <div class="dash-today-head">
+          <div>
+            <div class="dash-today-label">${label}</div>
+            <div class="dash-today-name">${s.deceased||'Serviço'}</div>
+            <div class="dash-today-meta">
+              ${s.location?`<span>📍 ${s.location}</span>`:''}
+              ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
+              ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
+              <span style="color:var(--accent);font-weight:600">💶 ${svcValue(s)}€/colab.</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')">WA</button>
+            <button class="btn btn-ghost btn-sm" onclick="openMeetModal('${s.id}')">Encontros</button>
+            <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
+          </div>
         </div>
-      </div>`).join('')}</div>`:''}
+        <div class="dash-colabs">
+          ${(s.workers||[]).length ? (s.workers).map(sw=>{
+            const w=workerById(sw.id);
+            const meet=sw.meetTime||subOneHour(s.funeralTime)||'';
+            const loc=sw.meetLocation||'Penso';
+            return `<div class="dash-colab-row">
+              <div class="avatar" style="width:32px;height:32px;font-size:11px;flex-shrink:0">${initials(w?.name||'?')}</div>
+              <div style="flex:1;min-width:0">
+                <div class="dash-colab-name">${w?.name||'?'}</div>
+                <div class="dash-colab-meet">${meet?`🕐 ${meet}`:''} ${loc?`· 📍 ${loc}`:''}</div>
+              </div>
+              <div class="dash-colab-actions">
+                ${sw.attended?'<span class="badge badge-green">✓ Esteve</span>':
+                  sw.unavailable?'<span class="badge badge-red">Indisponível</span>':
+                  sw.confirmed?`<span class="badge badge-yellow">Confirmou</span>
+                    <button class="btn btn-green btn-xs" onclick="setStatus('${s.id}','${sw.id}','attended',true)">✓ Esteve</button>`:
+                  `<button class="btn btn-yellow btn-xs" onclick="setStatus('${s.id}','${sw.id}','confirmed',true)">Confirmou</button>
+                   <button class="btn btn-orange btn-xs" onclick="setStatus('${s.id}','${sw.id}','unavailable',true)">Indisponível</button>`}
+              </div>
+            </div>`;
+          }).join('') : '<div style="padding:14px 0;color:var(--dim);font-size:13px">Sem colaboradores convocados.</div>'}
+        </div>
+      </div>`;
+    }).join('') : '<div style="color:var(--muted);font-size:13px;margin-bottom:16px">Sem serviços próximos.</div>'}
+
+    ${unconfirmed.length?`<div class="alert-card alert-warn">
+      <span style="font-size:18px">⚠️</span>
+      <div><div style="font-weight:600;font-size:13px">Sem confirmação</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">${unconfirmed.map(x=>`${x.worker.name} · ${x.service.deceased||fmtDate(x.service.date)}`).join(' &nbsp;·&nbsp; ')}</div>
+      </div></div>`:''}
+
+    ${pending>0?`<div class="alert-card alert-info" style="cursor:pointer" onclick="showTab('requests')">
+      <span style="font-size:18px">💬</span>
+      <div><div style="font-weight:600;font-size:13px">${pending} pedido${pending>1?'s':''} pendente${pending>1?'s':''}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">Clica para ver</div></div></div>`:''}
+
+    <div class="section-lbl">Esta semana</div>
+    ${weekSvcs.length ? weekSvcs.map(s=>{
+      const d=s.date.split('-');
+      return `<div class="week-card" onclick="openDetail('${s.id}')">
+        <div class="week-date-box">
+          <div class="week-day">${d[2]}</div>
+          <div class="week-month">${['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][parseInt(d[1])-1]}</div>
+        </div>
+        <div class="week-info">
+          <div class="week-name">${s.deceased||'Serviço'}</div>
+          <div class="week-loc">${s.location||''}${s.funeralTime?' · '+s.funeralTime:''}</div>
+          <div class="week-chips">${(s.workers||[]).map(sw=>statusChip(sw)).join('')}</div>
+        </div>
+      </div>`;
+    }).join('') : '<div style="color:var(--muted);font-size:13px">Sem serviços esta semana.</div>'}
+
+    <div class="section-lbl">Este mês</div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val">${monthSvcs}</div><div class="stat-lbl">Serviços</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--red)">${totalDebt}€</div><div class="stat-lbl">Em dívida</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--green)">${monthPaid}€</div><div class="stat-lbl">Pago este mês</div></div>
+      <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Colaboradores</div></div>
+    </div>
   `;
+}
+
+// ── STATUS UPDATE ──────────────────────────────────────────────────────────
+async function setStatus(serviceId, workerId, field, value) {
+  const s=services.find(x=>x.id===serviceId);
+  const updated=(s.workers||[]).map(sw=>{
+    if(sw.id!==workerId) return sw;
+    // reset others when setting attended
+    if(field==='attended') return {...sw,attended:value,confirmed:value?true:sw.confirmed,unavailable:false};
+    if(field==='unavailable') return {...sw,unavailable:value,confirmed:false,attended:false};
+    return {...sw,[field]:value};
+  });
+  await db.collection('services').doc(serviceId).update({workers:updated});
+}
+
+// ── MEET MODAL ─────────────────────────────────────────────────────────────
+function openMeetModal(serviceId) {
+  meetServiceId=serviceId;
+  const s=services.find(x=>x.id===serviceId);
+  document.getElementById('m-meet-title').textContent=`Encontros · ${s.deceased||fmtDate(s.date)}`;
+  const defaultMeet=subOneHour(s.funeralTime);
+  document.getElementById('m-meet-body').innerHTML=(s.workers||[]).map(sw=>{
+    const w=workerById(sw.id);
+    return `<div class="colab-meet-row">
+      <div class="colab-meet-name">${w?.name||'?'}</div>
+      <div class="colab-meet-fields">
+        <input type="time" id="meet-time-${sw.id}" value="${sw.meetTime||defaultMeet}" placeholder="Hora">
+        <input type="text"  id="meet-loc-${sw.id}"  value="${sw.meetLocation||'Penso'}" placeholder="Local de encontro">
+      </div>
+    </div>`;
+  }).join('')||'<div style="color:var(--muted);font-size:13px">Sem colaboradores neste serviço.</div>';
+  openM('m-meet');
+}
+
+async function saveMeetData() {
+  const s=services.find(x=>x.id===meetServiceId);
+  const updated=(s.workers||[]).map(sw=>({
+    ...sw,
+    meetTime:document.getElementById('meet-time-'+sw.id)?.value||'',
+    meetLocation:document.getElementById('meet-loc-'+sw.id)?.value||''
+  }));
+  await db.collection('services').doc(meetServiceId).update({workers:updated});
+  closeM('m-meet'); toast('Encontros atualizados ✓');
 }
 
 // ── WORKERS ────────────────────────────────────────────────────────────────
 function renderWorkers() {
-  document.getElementById('tab-workers').innerHTML = `
+  document.getElementById('tab-workers').innerHTML=`
     <div class="page-hd">
       <div class="page-title">Colaboradores<small>Gestão de tarefeiros e acessos</small></div>
       <button class="btn btn-primary" onclick="openWorkerModal()">+ Adicionar</button>
     </div>
-    ${workers.length ? workers.map(w=>{
-      const svcCount = services.filter(s=>(s.workers||[]).some(sw=>sw.id===w.id&&sw.attended)).length;
-      const debt = calcDebt(w.id);
-      const avBadge = w.avail==='alta'?'badge-green':w.avail==='media'?'badge-yellow':'badge-red';
-      const avLabel = w.avail==='alta'?'Alta':w.avail==='media'?'Média':'Baixa';
+    ${workers.length?workers.map(w=>{
+      const cnt=services.filter(s=>(s.workers||[]).some(sw=>sw.id===w.id&&sw.attended)).length;
+      const debt=calcDebt(w.id);
+      const avC=w.avail==='alta'?'badge-green':w.avail==='media'?'badge-yellow':'badge-red';
+      const avL=w.avail==='alta'?'Alta':w.avail==='media'?'Média':'Baixa';
       return `<div class="w-card">
         <div class="avatar">${initials(w.name)}</div>
         <div class="w-info">
           <div class="w-name">${w.name}</div>
           <div class="w-meta">
-            <span class="badge ${avBadge}" style="font-size:10px">${avLabel}</span>
+            <span class="badge ${avC}" style="font-size:10px">${avL}</span>
             ${w.phone?`<span>📞 ${w.phone}</span>`:''}
             ${w.location?`<span>📍 ${w.location}</span>`:''}
-            <span>✔ ${svcCount} serviço${svcCount!==1?'s':''}</span>
+            <span>✔ ${cnt} serviço${cnt!==1?'s':''}</span>
             ${debt>0?`<span style="color:var(--red)">💶 ${debt}€</span>`:''}
           </div>
           ${w.notes?`<div style="font-size:12px;color:var(--dim);margin-top:3px">${w.notes}</div>`:''}
@@ -536,309 +693,307 @@ function renderWorkers() {
           <button class="btn btn-danger btn-sm" onclick="deleteWorker('${w.id}')">✕</button>
         </div>
       </div>`;
-    }).join('') : '<div class="empty"><div class="empty-icon">👤</div><p>Sem colaboradores. Adiciona o primeiro.</p></div>'}
-  `;
+    }).join(''):'<div class="empty"><div class="empty-icon">👤</div><p>Sem colaboradores ainda.</p></div>'}`;
 }
 
 function openWorkerModal(id=null) {
-  editingWorkerId = id;
-  document.getElementById('m-worker-title').textContent = id ? 'Editar Colaborador' : 'Novo Colaborador';
-  document.getElementById('wf-pass-wrap').style.display = id ? 'none' : 'block';
-  const w = id ? workerById(id) : null;
-  document.getElementById('wf-name').value  = w?.name||'';
-  document.getElementById('wf-email').value = w?.email||'';
-  document.getElementById('wf-pass').value  = '';
-  document.getElementById('wf-phone').value = w?.phone||'';
-  document.getElementById('wf-loc').value   = w?.location||'';
-  document.getElementById('wf-avail').value = w?.avail||'alta';
-  document.getElementById('wf-notes').value = w?.notes||'';
+  editingWorkerId=id;
+  document.getElementById('m-worker-title').textContent=id?'Editar Colaborador':'Novo Colaborador';
+  document.getElementById('wf-pass-wrap').style.display=id?'none':'block';
+  const w=id?workerById(id):null;
+  document.getElementById('wf-name').value=w?.name||'';
+  document.getElementById('wf-email').value=w?.email||'';
+  document.getElementById('wf-pass').value='';
+  document.getElementById('wf-phone').value=w?.phone||'';
+  document.getElementById('wf-loc').value=w?.location||'';
+  document.getElementById('wf-avail').value=w?.avail||'alta';
+  document.getElementById('wf-notes').value=w?.notes||'';
   openM('m-worker');
   setTimeout(()=>document.getElementById('wf-name').focus(),100);
 }
 
 async function saveWorker() {
-  const name  = document.getElementById('wf-name').value.trim();
-  const email = document.getElementById('wf-email').value.trim();
-  const pass  = document.getElementById('wf-pass').value;
-  if (!name) { toast('Nome obrigatório'); return; }
-  const data = { name, email, phone: document.getElementById('wf-phone').value.trim(),
-    location: document.getElementById('wf-loc').value.trim(),
-    avail: document.getElementById('wf-avail').value,
-    notes: document.getElementById('wf-notes').value.trim() };
+  const name=document.getElementById('wf-name').value.trim();
+  const email=document.getElementById('wf-email').value.trim();
+  const pass=document.getElementById('wf-pass').value;
+  if(!name){toast('Nome obrigatório');return;}
+  const data={name,email,phone:document.getElementById('wf-phone').value.trim(),
+    location:document.getElementById('wf-loc').value.trim(),
+    avail:document.getElementById('wf-avail').value,
+    notes:document.getElementById('wf-notes').value.trim()};
   try {
-    if (editingWorkerId) {
+    if(editingWorkerId){
       await db.collection('workers').doc(editingWorkerId).update(data);
       toast('Colaborador atualizado ✓');
     } else {
-      if (!email) { toast('Email obrigatório'); return; }
-      if (pass.length < 6) { toast('Password mínimo 6 caracteres'); return; }
-      const sec = firebase.initializeApp(fbConfig, 'sec_'+Date.now());
+      if(!email){toast('Email obrigatório');return;}
+      if(pass.length<6){toast('Password mínimo 6 caracteres');return;}
+      const sec=firebase.initializeApp(fbConfig,'sec_'+Date.now());
       try {
-        const cred = await sec.auth().createUserWithEmailAndPassword(email, pass);
-        await cred.user.updateProfile({ displayName: name });
-        data.uid = cred.user.uid;
-        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        const cred=await sec.auth().createUserWithEmailAndPassword(email,pass);
+        await cred.user.updateProfile({displayName:name});
+        data.uid=cred.user.uid;
+        data.createdAt=FS.serverTimestamp();
         await db.collection('workers').add(data);
-        toast('Colaborador criado ✓ — login: ' + email);
+        toast('Colaborador criado ✓ — login: '+email);
       } finally { await sec.delete(); }
     }
     closeM('m-worker');
-  } catch(e) {
+  } catch(e){
     const m={'auth/email-already-in-use':'Email já existe.','auth/invalid-email':'Email inválido.','auth/weak-password':'Password fraca.'};
     toast(m[e.code]||'Erro: '+e.message);
   }
 }
 
-async function deleteWorker(id) {
-  if (!confirm('Eliminar colaborador?')) return;
+async function deleteWorker(id){
+  if(!confirm('Eliminar colaborador?'))return;
   await db.collection('workers').doc(id).delete();
   toast('Eliminado');
 }
 
 // ── SERVICES ───────────────────────────────────────────────────────────────
-function renderServices() {
-  document.getElementById('tab-services').innerHTML = `
+function svcCard(s,showVal=false){
+  const val=svcValue(s);
+  return `<div class="svc">
+    <div class="svc-head">
+      <div style="flex:1;min-width:0">
+        <div class="svc-date">${fmtDate(s.date)}</div>
+        <div class="svc-deceased">${s.deceased||'Serviço'}</div>
+        <div class="svc-meta">
+          ${s.location?`<span>📍 ${s.location}</span>`:''}
+          ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
+          ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
+          ${showVal?`<span style="color:var(--accent);font-weight:600">💶 ${val}€</span>`:''}
+        </div>
+      </div>
+      <div class="svc-actions">
+        <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')">WA</button>
+        <button class="btn btn-ghost btn-sm" onclick="openMeetModal('${s.id}')">Encontros</button>
+        <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
+        <button class="btn btn-ghost btn-sm" onclick="openServiceModal('${s.id}')">✎</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSvc('${s.id}')">✕</button>
+      </div>
+    </div>
+    <div class="svc-divider"></div>
+    <div class="svc-body">
+      ${(s.workers||[]).length?(s.workers).map(sw=>statusChip(sw)).join(''):'<span style="color:var(--dim);font-size:12px">Sem colaboradores convocados</span>'}
+    </div>
+  </div>`;
+}
+
+function renderServices(){
+  document.getElementById('tab-services').innerHTML=`
     <div class="page-hd">
       <div class="page-title">Serviços<small>Histórico e gestão</small></div>
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
-    ${services.length ? services.map(s=>svcCard(s,true)).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços registados.</p></div>'}
-  `;
+    ${services.length?services.map(s=>svcCard(s,true)).join(''):'<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços registados.</p></div>'}`;
 }
 
-function openServiceModal(id=null) {
-  editingServiceId = id;
-  document.getElementById('m-svc-title').textContent = id ? 'Editar Serviço' : 'Novo Serviço';
-  const s = id ? services.find(x=>x.id===id) : null;
-  document.getElementById('sf-deceased').value = s?.deceased||'';
-  document.getElementById('sf-date').value     = s?.date||new Date().toISOString().slice(0,10);
-  document.getElementById('sf-loc').value      = s?.location||'';
-  document.getElementById('sf-deposit').value  = s?.depositTime||'';
-  document.getElementById('sf-funeral').value  = s?.funeralTime||'';
-  document.getElementById('sf-value').value    = s?.value||30;
-  document.getElementById('sf-notes').value    = s?.notes||'';
-  const box = document.getElementById('sf-workers');
-  box.innerHTML = workers.length ? workers.map(w=>{
-    const checked = s?.workers?.some(sw=>sw.id===w.id)?'checked':'';
+function openServiceModal(id=null){
+  editingServiceId=id;
+  document.getElementById('m-svc-title').textContent=id?'Editar Serviço':'Novo Serviço';
+  const s=id?services.find(x=>x.id===id):null;
+  document.getElementById('sf-deceased').value=s?.deceased||'';
+  document.getElementById('sf-date').value=s?.date||new Date().toISOString().slice(0,10);
+  document.getElementById('sf-loc').value=s?.location||'';
+  document.getElementById('sf-deposit').value=s?.depositTime||'';
+  document.getElementById('sf-funeral').value=s?.funeralTime||'';
+  document.getElementById('sf-value').value=s?.value||30;
+  document.getElementById('sf-notes').value=s?.notes||'';
+  const box=document.getElementById('sf-workers');
+  box.innerHTML=workers.length?workers.map(w=>{
+    const checked=s?.workers?.some(sw=>sw.id===w.id)?'checked':'';
     return `<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border)">
       <input type="checkbox" id="sf-w-${w.id}" ${checked} style="accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0">
       <label for="sf-w-${w.id}" style="flex:1;cursor:pointer;font-weight:500">${w.name}</label>
       ${w.location?`<span style="font-size:12px;color:var(--muted)">${w.location}</span>`:''}
     </div>`;
-  }).join('') : '<div style="color:var(--muted);font-size:13px;padding:8px 0">Sem colaboradores ainda.</div>';
+  }).join(''):'<div style="color:var(--muted);font-size:13px;padding:8px 0">Sem colaboradores ainda.</div>';
   openM('m-service');
 }
 
-async function saveService() {
-  const date = document.getElementById('sf-date').value;
-  if (!date) { toast('Data obrigatória'); return; }
-  const selectedWorkers = workers
-    .filter(w=>document.getElementById('sf-w-'+w.id)?.checked)
-    .map(w=>{
-      const ex = editingServiceId ? services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id) : null;
-      return { id:w.id, confirmed:ex?.confirmed||false, attended:ex?.attended||false };
-    });
-  const data = {
-    deceased: document.getElementById('sf-deceased').value.trim(),
-    date, location: document.getElementById('sf-loc').value.trim(),
-    depositTime: document.getElementById('sf-deposit').value,
-    funeralTime: document.getElementById('sf-funeral').value,
-    value: parseFloat(document.getElementById('sf-value').value)||30,
-    notes: document.getElementById('sf-notes').value.trim(),
-    workers: selectedWorkers
-  };
-  if (editingServiceId) {
+async function saveService(){
+  const date=document.getElementById('sf-date').value;
+  if(!date){toast('Data obrigatória');return;}
+  const selectedWorkers=workers.filter(w=>document.getElementById('sf-w-'+w.id)?.checked).map(w=>{
+    const ex=editingServiceId?services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id):null;
+    return {id:w.id,confirmed:ex?.confirmed||false,attended:ex?.attended||false,unavailable:ex?.unavailable||false,
+      meetTime:ex?.meetTime||'',meetLocation:ex?.meetLocation||''};
+  });
+  const data={deceased:document.getElementById('sf-deceased').value.trim(),date,
+    location:document.getElementById('sf-loc').value.trim(),
+    depositTime:document.getElementById('sf-deposit').value,
+    funeralTime:document.getElementById('sf-funeral').value,
+    value:parseFloat(document.getElementById('sf-value').value)||30,
+    notes:document.getElementById('sf-notes').value.trim(),workers:selectedWorkers};
+  if(editingServiceId){
     await db.collection('services').doc(editingServiceId).update(data);
     toast('Serviço atualizado ✓');
   } else {
-    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    data.createdAt=FS.serverTimestamp();
     await db.collection('services').add(data);
     toast('Serviço criado ✓');
   }
   closeM('m-service');
 }
 
-async function deleteSvc(id) {
-  if (!confirm('Eliminar este serviço?')) return;
+async function deleteSvc(id){
+  if(!confirm('Eliminar este serviço?'))return;
   await db.collection('services').doc(id).delete();
   toast('Eliminado');
 }
 
-async function toggleWorker(serviceId, workerId, field) {
-  const s = services.find(x=>x.id===serviceId);
-  const updated = (s.workers||[]).map(sw=>sw.id===workerId?{...sw,[field]:!sw[field]}:sw);
-  await db.collection('services').doc(serviceId).update({workers:updated});
-}
-
-function openDetail(id) {
-  const s = services.find(x=>x.id===id);
-  const val = svcValue(s);
-  document.getElementById('m-detail-title').textContent = s.deceased||'Serviço';
-  document.getElementById('m-detail-body').innerHTML = `
-    <div style="margin-bottom:14px;padding:12px;background:var(--surface2);border-radius:var(--r)">
-      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;display:flex;flex-wrap:wrap;gap:12px">
-        <span>📅 ${fmtDate(s.date)}</span>
-        ${s.location?`<span>📍 ${s.location}</span>`:''}
-        ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
-        ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
-        <span style="color:var(--accent);font-weight:600">💶 ${val}€ por colaborador</span>
-      </div>
-      ${s.notes?`<div style="font-size:12px;color:var(--muted);font-style:italic">${s.notes}</div>`:''}
+function openDetail(id){
+  const s=services.find(x=>x.id===id);
+  const val=svcValue(s);
+  document.getElementById('m-detail-title').textContent=s.deceased||'Serviço';
+  document.getElementById('m-detail-body').innerHTML=`
+    <div style="padding:12px;background:var(--surface2);border-radius:var(--r);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted)">
+      <span>📅 ${fmtDate(s.date)}</span>
+      ${s.location?`<span>📍 ${s.location}</span>`:''}
+      ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
+      ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
+      <span style="color:var(--accent);font-weight:600">💶 ${val}€/colab.</span>
     </div>
     <div style="overflow-x:auto">
     <table class="tbl">
-      <thead><tr><th>Colaborador</th><th>Confirmou</th><th>Esteve presente</th><th>Pagamento</th></tr></thead>
-      <tbody>
-        ${(s.workers||[]).map(sw=>{
-          const w=workerById(sw.id);
-          const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
-          return `<tr>
-            <td style="font-weight:500">${w?.name||'?'}</td>
-            <td><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-              <input type="checkbox" ${sw.confirmed?'checked':''} style="accent-color:var(--yellow);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','confirmed')">
-              <span style="font-size:12px;color:var(--muted)">Sim</span>
-            </label></td>
-            <td><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-              <input type="checkbox" ${sw.attended?'checked':''} style="accent-color:var(--green);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','attended')">
-              <span style="font-size:12px;color:var(--muted)">Sim</span>
-            </label></td>
-            <td style="font-family:var(--mono);font-size:13px;color:${!sw.attended?'var(--dim)':paid>=val?'var(--green)':'var(--red)'}">
-              ${!sw.attended?'—':paid>=val?'✓ Pago':val+'€ devido'}
-            </td>
-          </tr>`;
-        }).join('')||'<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">Sem colaboradores</td></tr>'}
+      <thead><tr><th>Colaborador</th><th>Encontro</th><th>Confirmou</th><th>Esteve</th><th>Pagamento</th></tr></thead>
+      <tbody>${(s.workers||[]).map(sw=>{
+        const w=workerById(sw.id);
+        const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
+        const meetT=sw.meetTime||subOneHour(s.funeralTime)||'';
+        const meetL=sw.meetLocation||'Penso';
+        return `<tr>
+          <td style="font-weight:500">${w?.name||'?'}</td>
+          <td style="font-size:12px;color:var(--muted)">${meetT?meetT+' ':''}<br><span style="font-size:11px">${meetL}</span></td>
+          <td><input type="checkbox" ${sw.confirmed?'checked':''} style="accent-color:var(--yellow);cursor:pointer" onchange="setStatus('${s.id}','${sw.id}','confirmed',this.checked)"></td>
+          <td><input type="checkbox" ${sw.attended?'checked':''} style="accent-color:var(--green);cursor:pointer" onchange="setStatus('${s.id}','${sw.id}','attended',this.checked)"></td>
+          <td style="font-family:var(--mono);font-size:12px;color:${!sw.attended?'var(--dim)':paid>=val?'var(--green)':'var(--red)'}">
+            ${!sw.attended?'—':paid>=val?'✓ Pago':val+'€ devido'}
+          </td>
+        </tr>`;
+      }).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px">Sem colaboradores</td></tr>'}
       </tbody>
-    </table>
-    </div>
-    <div style="margin-top:14px">
-      <button class="btn btn-primary btn-sm" onclick="payAllAttended('${s.id}')">Marcar todos como pagos</button>
-    </div>
-  `;
+    </table></div>
+    ${s.notes?`<div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:var(--r);font-size:12px;color:var(--muted);font-style:italic">${s.notes}</div>`:''}
+    <div style="margin-top:14px"><button class="btn btn-primary btn-sm" onclick="payAllAttended('${s.id}')">Marcar todos como pagos</button></div>`;
   openM('m-detail');
 }
 
-// ── PAYMENTS ───────────────────────────────────────────────────────────────
-function renderPayments() {
-  const debtors = workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
-  const history = [...payments].filter(p=>p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
-  document.getElementById('tab-payments').innerHTML = `
-    <div class="page-hd"><div class="page-title">Pagamentos<small>Dívidas e histórico</small></div></div>
-    <div class="section-lbl">Por pagar</div>
-    <div class="card">
-      ${debtors.length ? debtors.map(({w,d})=>`
-        <div class="pay-row">
-          <div class="pay-info"><div class="pay-name">${w.name}</div><div class="pay-detail">${w.phone||''}</div></div>
-          <div style="display:flex;align-items:center;gap:10px">
-            <div class="pay-amt">${d}€</div>
-            <button class="btn btn-primary btn-sm" onclick="markAllPaid('${w.id}')">Pagar tudo</button>
-          </div>
-        </div>`).join('') : '<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Tudo em dia ✓</div>'}
-    </div>
-    <div class="section-lbl">Histórico</div>
-    <div class="card">
-      ${history.slice(0,30).length ? history.slice(0,30).map(p=>{
-        const w=workerById(p.workerId); const s=services.find(x=>x.id===p.serviceId);
-        return `<div class="pay-row">
-          <div class="pay-info">
-            <div class="pay-name">${w?.name||'?'}</div>
-            <div class="pay-detail">${s?`${s.deceased?s.deceased+' · ':''}${fmtDate(s.date)}`:'—'} · pago em ${fmtTs(p.paidAt)}</div>
-          </div>
-          <div class="pay-amt ok">${p.amount}€</div>
-        </div>`;
-      }).join('') : '<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Sem histórico ainda</div>'}
-    </div>
-  `;
-}
-
-async function markAllPaid(workerId) {
-  const batch = db.batch();
-  for (const s of services) {
-    for (const sw of (s.workers||[])) {
-      if (sw.id!==workerId||!sw.attended) continue;
-      const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
-      const val=svcValue(s);
-      if (paid<val) {
-        batch.set(db.collection('payments').doc(), { workerId, serviceId:s.id, amount:val, paid:true, paidAt:firebase.firestore.FieldValue.serverTimestamp() });
-      }
-    }
-  }
-  await batch.commit(); toast('Pagamentos registados ✓');
-}
-
-async function payAllAttended(serviceId) {
-  const s=services.find(x=>x.id===serviceId); const val=svcValue(s);
-  const batch=db.batch();
-  for (const sw of (s.workers||[])) {
-    if (!sw.attended) continue;
-    const paid=payments.filter(p=>p.serviceId===serviceId&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
-    if (paid<val) batch.set(db.collection('payments').doc(), { workerId:sw.id, serviceId, amount:val, paid:true, paidAt:firebase.firestore.FieldValue.serverTimestamp() });
-  }
-  await batch.commit(); toast('Pagamentos registados ✓');
-}
-
-// ── CONVOKE WHATSAPP ────────────────────────────────────────────────────────
-function openConvoke(serviceId) {
-  const s = services.find(x=>x.id===serviceId);
-  if (!s?.workers?.length) {
+// ── WHATSAPP ───────────────────────────────────────────────────────────────
+function openConvoke(serviceId){
+  const s=services.find(x=>x.id===serviceId);
+  if(!s?.workers?.length){
     document.getElementById('m-convoke-body').innerHTML='<div style="color:var(--muted);padding:16px">Sem colaboradores convocados.</div>';
-    openM('m-convoke'); return;
+    openM('m-convoke');return;
   }
-  // Hora de encontro = 1h antes do funeral
-  let meetTime = '';
-  if (s.funeralTime) {
-    const [h,m] = s.funeralTime.split(':').map(Number);
-    const d = new Date(2000,0,1,h,m); d.setHours(d.getHours()-1);
-    meetTime = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-  }
-
-  // Mensagem SEM valor
-  const msg = `Olá, aqui é o Nicolau (Agência Mira).
+  document.getElementById('m-convoke-body').innerHTML=`
+    <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">
+      Mensagem personalizada por colaborador (sem valor)
+    </div>
+    ${s.workers.map(sw=>{
+      const w=workerById(sw.id);
+      const clean=(w?.phone||'').replace(/\s/g,'').replace('+','');
+      const meetT=sw.meetTime||subOneHour(s.funeralTime)||'A confirmar';
+      const meetL=sw.meetLocation||'Penso (centro logístico)';
+      const msg=`Olá ${w?.name?.split(' ')[0]||''}, aqui é o Nicolau (Agência Mira).
 
 Tens disponibilidade amanhã para um serviço?
 
 👤 ${s.deceased||'—'}
 📍 ${s.location||'A confirmar'}${s.depositTime?`\n⚰️  Depósito: ${s.depositTime}`:''}
 🕐  Funeral: ${s.funeralTime||'A confirmar'}
-🤝  Concentração: ${meetTime||'A confirmar'} em Penso (centro logístico)
+
+🤝  O teu encontro:
+    Hora: ${meetT}
+    Local: ${meetL}
 
 Fato preto · Camisa branca · Gravata preta · Sapato social
 
-Confirmas disponibilidade? 🙏`;
-
-  document.getElementById('m-convoke-body').innerHTML = `
-    <div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Mensagem enviada (sem valor)</div>
-      <div class="wa-preview">${msg}</div>
-    </div>
-    <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Enviar para</div>
-    ${s.workers.map(sw=>{
-      const w=workerById(sw.id);
-      const clean=(w?.phone||'').replace(/\s/g,'').replace('+','');
-      return `<div class="wa-row">
-        <div class="avatar" style="width:32px;height:32px;font-size:12px">${initials(w?.name||'?')}</div>
-        <div style="flex:1;font-weight:500">${w?.name||'?'}</div>
-        <span class="badge ${sw.confirmed?'badge-green':sw.attended?'badge-green':'badge-gray'}" style="margin-right:8px">${sw.attended?'✓ Esteve':sw.confirmed?'Confirmou':'Convocado'}</span>
-        ${w?.phone?`<a class="btn btn-wa btn-sm" href="https://wa.me/${clean}?text=${encodeURIComponent(msg)}" target="_blank">Abrir WA</a>`:'<span style="color:var(--dim);font-size:12px">Sem nº</span>'}
+Confirmas? 🙏`;
+      return `<div style="background:var(--surface2);border-radius:var(--r2);padding:14px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <div class="avatar" style="width:32px;height:32px;font-size:11px">${initials(w?.name||'?')}</div>
+          <div style="flex:1;font-weight:600">${w?.name||'?'}</div>
+          <span class="badge ${sw.confirmed?'badge-green':sw.unavailable?'badge-red':'badge-gray'}">${sw.attended?'✓ Esteve':sw.unavailable?'Indisponível':sw.confirmed?'Confirmou':'Convocado'}</span>
+          ${w?.phone?`<a class="btn btn-wa btn-sm" href="https://wa.me/${clean}?text=${encodeURIComponent(msg)}" target="_blank">Abrir WA</a>`:'<span style="color:var(--dim);font-size:12px">Sem nº</span>'}
+        </div>
+        <div class="wa-preview" style="font-size:12px">${msg}</div>
       </div>`;
-    }).join('')}
-  `;
+    }).join('')}`;
   openM('m-convoke');
 }
 
+// ── PAYMENTS ───────────────────────────────────────────────────────────────
+function renderPayments(){
+  const debtors=workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
+  const history=[...payments].filter(p=>p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
+  document.getElementById('tab-payments').innerHTML=`
+    <div class="page-hd"><div class="page-title">Pagamentos<small>Dívidas e histórico</small></div></div>
+    <div class="section-lbl">Por pagar</div>
+    <div class="card">
+      ${debtors.length?debtors.map(({w,d})=>`
+        <div class="pay-row">
+          <div class="pay-info"><div class="pay-name">${w.name}</div><div class="pay-detail">${w.phone||''}</div></div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="pay-amt">${d}€</div>
+            <button class="btn btn-primary btn-sm" onclick="markAllPaid('${w.id}')">Pagar tudo</button>
+          </div>
+        </div>`).join(''):'<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Tudo em dia ✓</div>'}
+    </div>
+    <div class="section-lbl">Histórico</div>
+    <div class="card">
+      ${history.slice(0,30).length?history.slice(0,30).map(p=>{
+        const w=workerById(p.workerId);const s=services.find(x=>x.id===p.serviceId);
+        return `<div class="pay-row">
+          <div class="pay-info">
+            <div class="pay-name">${w?.name||'?'}</div>
+            <div class="pay-detail">${s?`${s.deceased?s.deceased+' · ':''}${fmtDate(s.date)}`:''} · ${fmtTs(p.paidAt)}</div>
+          </div>
+          <div class="pay-amt ok">${p.amount}€</div>
+        </div>`;
+      }).join(''):'<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Sem histórico ainda</div>'}
+    </div>`;
+}
+
+async function markAllPaid(workerId){
+  const batch=db.batch();
+  for(const s of services){
+    for(const sw of (s.workers||[])){
+      if(sw.id!==workerId||!sw.attended)continue;
+      const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
+      const val=svcValue(s);
+      if(paid<val) batch.set(db.collection('payments').doc(),{workerId,serviceId:s.id,amount:val,paid:true,paidAt:FS.serverTimestamp()});
+    }
+  }
+  await batch.commit();toast('Pagamentos registados ✓');
+}
+
+async function payAllAttended(serviceId){
+  const s=services.find(x=>x.id===serviceId);const val=svcValue(s);
+  const batch=db.batch();
+  for(const sw of (s.workers||[])){
+    if(!sw.attended)continue;
+    const paid=payments.filter(p=>p.serviceId===serviceId&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
+    if(paid<val) batch.set(db.collection('payments').doc(),{workerId:sw.id,serviceId,amount:val,paid:true,paidAt:FS.serverTimestamp()});
+  }
+  await batch.commit();toast('Pagamentos registados ✓');
+}
+
 // ── REQUESTS ───────────────────────────────────────────────────────────────
-function renderRequests() {
-  const pending  = requests.filter(r=>r.status==='pending');
-  const resolved = requests.filter(r=>r.status==='resolved');
-  document.getElementById('tab-requests').innerHTML = `
+function renderRequests(){
+  const pending=requests.filter(r=>r.status==='pending');
+  const resolved=requests.filter(r=>r.status==='resolved');
+  document.getElementById('tab-requests').innerHTML=`
     <div class="page-hd"><div class="page-title">Pedidos<small>Mensagens dos colaboradores</small></div></div>
     ${pending.length?`<div class="section-lbl">Pendentes (${pending.length})</div>${pending.map(reqCard).join('')}`:'<div style="color:var(--muted);font-size:13px;padding:8px 0 16px">Sem pedidos pendentes ✓</div>'}
-    ${resolved.length?`<div class="section-lbl">Resolvidos</div>${resolved.slice(0,10).map(reqCard).join('')}`:''}
-  `;
+    ${resolved.length?`<div class="section-lbl">Resolvidos</div>${resolved.slice(0,10).map(reqCard).join('')}`:''}`;
 }
-function reqCard(r) {
+function reqCard(r){
   const w=workerById(r.workerId);
   return `<div class="req-card">
-    <div class="req-hd">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
       <div><div style="font-weight:600">${r.workerName||w?.name||'?'}</div><div style="font-size:11px;color:var(--muted)">${fmtTs(r.createdAt)}</div></div>
       <span class="badge ${r.status==='pending'?'badge-yellow':'badge-gray'}">${r.status==='pending'?'Pendente':'Resolvido'}</span>
     </div>
@@ -847,55 +1002,57 @@ function reqCard(r) {
     ${r.status==='pending'?`<button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="openResolve('${r.id}','${(r.message||'').replace(/'/g,"\\'")}')">Resolver</button>`:''}
   </div>`;
 }
-function openResolve(id,msg) {
+function openResolve(id,msg){
   resolvingRequestId=id;
   document.getElementById('resolve-preview').textContent=msg;
   document.getElementById('resolve-note').value='';
   openM('m-resolve');
 }
-async function resolveRequest() {
+async function resolveRequest(){
   const note=document.getElementById('resolve-note').value.trim();
   await db.collection('requests').doc(resolvingRequestId).update({
-    status:'resolved', resolvedAt:firebase.firestore.FieldValue.serverTimestamp(),
-    ...(note?{adminNote:note}:{})
+    status:'resolved',resolvedAt:FS.serverTimestamp(),...(note?{adminNote:note}:{})
   });
-  closeM('m-resolve'); toast('Pedido resolvido ✓');
+  closeM('m-resolve');toast('Pedido resolvido ✓');
 }
 
 // ── WORKER PORTAL ──────────────────────────────────────────────────────────
-function myProfile() { return workers.find(w=>w.uid===currentUser.uid); }
+function myProfile(){return workers.find(w=>w.uid===currentUser.uid);}
 
-function renderMyServices() {
-  const me = myProfile();
-  const myId = me?.id;
-  const myServices = services.filter(s=>(s.workers||[]).some(sw=>sw.id===myId));
-  document.getElementById('tab-my-services').innerHTML = `
+function renderMyServices(){
+  const me=myProfile();const myId=me?.id;
+  const myServices=services.filter(s=>(s.workers||[]).some(sw=>sw.id===myId));
+  document.getElementById('tab-my-services').innerHTML=`
     <div class="page-hd"><div class="page-title">Os meus serviços</div></div>
     ${!myId?'<div class="empty"><div class="empty-icon">⚠️</div><p>Perfil não encontrado.<br>Contacta o administrador.</p></div>':
-    myServices.length ? myServices.map(s=>{
+    myServices.length?myServices.map(s=>{
       const sw=s.workers.find(x=>x.id===myId);
       const val=svcValue(s);
+      const meetT=sw.meetTime||subOneHour(s.funeralTime)||'';
+      const meetL=sw.meetLocation||'Penso';
       return `<div class="my-svc">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
-          <div>
-            <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin-bottom:3px">${fmtDate(s.date)}</div>
-            <div class="my-svc-name">${s.deceased||'Serviço'}</div>
-            <div class="my-svc-meta">
-              ${s.location?`<span>📍 ${s.location}</span>`:''}
-              ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
-              ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
-            </div>
-            ${sw.attended?`<span class="badge badge-green" style="margin-top:4px">✓ Esteve presente · <span style="font-family:var(--mono)">${val}€</span></span>`:
-              sw.confirmed?`<span class="badge badge-yellow">Confirmado</span>`:
-              `<button class="btn btn-green btn-sm" style="margin-top:6px" onclick="workerConfirm('${s.id}','${myId}')">Confirmar disponibilidade</button>`}
-          </div>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin-bottom:3px">${fmtDate(s.date)}</div>
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px">${s.deceased||'Serviço'}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);margin-bottom:10px">
+          ${s.location?`<span>📍 ${s.location}</span>`:''}
+          ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
+          ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
+        </div>
+        <div style="background:var(--surface2);border-radius:var(--r);padding:10px 12px;margin-bottom:10px;font-size:13px">
+          <div style="font-weight:600;margin-bottom:4px">O teu encontro</div>
+          <div style="color:var(--muted)">🕐 ${meetT||'A confirmar'} &nbsp;·&nbsp; 📍 ${meetL}</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          ${sw.attended?`<span class="badge badge-green">✓ Esteve presente · <span style="font-family:var(--mono)">${val}€</span></span>`:
+            sw.unavailable?'<span class="badge badge-red">Indisponível</span>':
+            sw.confirmed?'<span class="badge badge-yellow">Disponibilidade confirmada</span>':
+            `<button class="btn btn-green btn-sm" onclick="workerConfirm('${s.id}','${myId}')">Confirmar disponibilidade</button>`}
         </div>
       </div>`;
-    }).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Ainda não tens serviços atribuídos.</p></div>'}
-  `;
+    }).join(''):'<div class="empty"><div class="empty-icon">📋</div><p>Ainda não tens serviços atribuídos.</p></div>'}`;
 }
 
-async function workerConfirm(serviceId, workerId) {
+async function workerConfirm(serviceId,workerId){
   const s=services.find(x=>x.id===serviceId);
   await db.collection('services').doc(serviceId).update({
     workers:(s.workers||[]).map(sw=>sw.id===workerId?{...sw,confirmed:true}:sw)
@@ -903,71 +1060,65 @@ async function workerConfirm(serviceId, workerId) {
   toast('Disponibilidade confirmada ✓');
 }
 
-function renderMyPayments() {
-  const me=myProfile(); const myId=me?.id;
+function renderMyPayments(){
+  const me=myProfile();const myId=me?.id;
   const debt=myId?calcDebt(myId):0;
   const myPay=payments.filter(p=>p.workerId===myId&&p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
   const attended=services.flatMap(s=>(s.workers||[]).filter(sw=>sw.id===myId&&sw.attended).map(()=>s));
-  const totalEarned=attended.reduce((a,s)=>a+svcValue(s),0);
-  document.getElementById('tab-my-payments').innerHTML = `
+  document.getElementById('tab-my-payments').innerHTML=`
     <div class="page-hd"><div class="page-title">Os meus pagamentos</div></div>
-    <div class="stats">
+    <div class="stats-row">
       <div class="stat"><div class="stat-val">${attended.length}</div><div class="stat-lbl">Serviços feitos</div></div>
       <div class="stat"><div class="stat-val" style="color:${debt>0?'var(--red)':'var(--green)'}">${debt>0?debt+'€':'0€'}</div><div class="stat-lbl">${debt>0?'Por receber':'Em dia ✓'}</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--green)">${myPay.reduce((a,p)=>a+p.amount,0)}€</div><div class="stat-lbl">Total recebido</div></div>
     </div>
     <div class="section-lbl">Histórico</div>
     <div class="card">
-      ${myPay.length ? myPay.map(p=>{
+      ${myPay.length?myPay.map(p=>{
         const s=services.find(x=>x.id===p.serviceId);
         return `<div class="pay-row">
-          <div class="pay-info">
-            <div class="pay-name">${s?.deceased||'Serviço'}</div>
-            <div class="pay-detail">${s?fmtDate(s.date):''} · recebido em ${fmtTs(p.paidAt)}</div>
-          </div>
+          <div class="pay-info"><div class="pay-name">${s?.deceased||'Serviço'}</div><div class="pay-detail">${s?fmtDate(s.date):''} · recebido em ${fmtTs(p.paidAt)}</div></div>
           <div class="pay-amt ok">${p.amount}€</div>
         </div>`;
-      }).join('') : '<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Sem pagamentos registados ainda.</div>'}
-    </div>
-  `;
+      }).join(''):'<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Sem pagamentos registados ainda.</div>'}
+    </div>`;
 }
 
-function renderMyRequests() {
-  const me=myProfile(); const myId=me?.id;
+function renderMyRequests(){
+  const me=myProfile();const myId=me?.id;
   const myReqs=requests.filter(r=>r.workerId===myId||r.workerUid===currentUser.uid)
     .sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-  document.getElementById('tab-my-requests').innerHTML = `
+  document.getElementById('tab-my-requests').innerHTML=`
     <div class="page-hd"><div class="page-title">Pedido de alteração</div></div>
     <div class="card" style="margin-bottom:20px">
       <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Envia uma mensagem ao administrador — indisponibilidade, alteração de dados, ou outra situação.</div>
-      <div class="field" style="margin-bottom:10px"><label>Mensagem</label><textarea id="req-msg" placeholder="ex: Não posso no dia 20/06. Quero alterar o meu contacto para..."></textarea></div>
+      <div class="field" style="margin-bottom:10px"><label>Mensagem</label><textarea id="req-msg" placeholder="ex: Não posso no dia 20/06. Quero alterar o meu contacto..."></textarea></div>
       <button class="btn btn-primary" onclick="submitRequest('${myId||''}')">Enviar pedido</button>
     </div>
     ${myReqs.length?`<div class="section-lbl">Os meus pedidos</div>${myReqs.map(r=>`
       <div class="req-card">
-        <div class="req-hd"><div style="font-size:11px;color:var(--muted)">${fmtTs(r.createdAt)}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;color:var(--muted)">${fmtTs(r.createdAt)}</div>
           <span class="badge ${r.status==='pending'?'badge-yellow':'badge-gray'}">${r.status==='pending'?'Pendente':'Resolvido'}</span>
         </div>
         <div class="req-msg">${r.message}</div>
         ${r.adminNote?`<div style="font-size:12px;color:var(--muted);font-style:italic">Resposta: ${r.adminNote}</div>`:''}
-      </div>`).join('')}`:''}
-  `;
+      </div>`).join('')}`:''}`;
 }
 
-async function submitRequest(workerId) {
+async function submitRequest(workerId){
   const msg=document.getElementById('req-msg').value.trim();
   if(!msg){toast('Escreve uma mensagem');return;}
   const me=myProfile();
   await db.collection('requests').add({
-    workerId:workerId||me?.id||'', workerUid:currentUser.uid,
+    workerId:workerId||me?.id||'',workerUid:currentUser.uid,
     workerName:me?.name||currentUser.displayName||currentUser.email,
-    message:msg, status:'pending', createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    message:msg,status:'pending',createdAt:FS.serverTimestamp()
   });
   document.getElementById('req-msg').value='';
   toast('Pedido enviado ✓');
 }
 
-// ── CLOSE ON OVERLAY CLICK ─────────────────────────────────────────────────
 document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 </script>
 </body>
