@@ -332,12 +332,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
       <div class="field-row3">
         <div class="field"><label>Hora do depósito</label><input id="sf-deposit" type="time"><div class="field-hint">Opcional</div></div>
         <div class="field"><label>Hora do funeral</label><input id="sf-funeral" type="time"></div>
-        <div class="field"><label>Valor por colaborador</label><input id="sf-value" type="number" min="0" step="0.5" value="30"><div class="field-hint">Default: 30€</div></div>
       </div>
       <div class="field"><label>Notas internas</label><textarea id="sf-notes" placeholder="Não visível na mensagem WhatsApp"></textarea></div>
       <div class="field">
         <label>Colaboradores convocados</label>
-        <div id="sf-workers" style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);padding:4px 8px"></div>
+        <div class="field-hint" style="margin-bottom:8px">Define funções e valor individualmente para cada colaborador</div>
+        <div id="sf-workers" style="max-height:340px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r)"></div>
       </div>
     </div>
     <div class="modal-foot">
@@ -415,6 +415,14 @@ const db   = firebase.firestore();
 const FS   = firebase.firestore.FieldValue;
 
 const ADMIN_EMAIL = 'nicolaumira@gmail.com';
+
+const FUNCOES = [
+  { id: 'presenca',     label: 'Presença' },
+  { id: 'recolha',      label: 'Recolha e transporte' },
+  { id: 'preparacao',   label: 'Preparação' },
+  { id: 'apoio',        label: 'Apoio geral' },
+  { id: 'coveiro',      label: 'Coveiro' },
+];
 
 let currentUser=null, isAdmin=false, currentTab='dash';
 let editingWorkerId=null, editingServiceId=null, meetServiceId=null, resolvingRequestId=null;
@@ -522,13 +530,24 @@ function renderCurrent() {
     'my-requests':renderMyRequests})[currentTab]?.();
 }
 
+function toggleWorkerSection(wid) {
+  const checked = document.getElementById('sf-w-'+wid)?.checked;
+  const detail  = document.getElementById('sf-detail-'+wid);
+  if(detail) detail.style.display = checked ? 'block' : 'none';
+}
+
 // ── PAYMENT HELPERS ────────────────────────────────────────────────────────
 function calcDebt(workerId) {
   let owed=0;
-  services.forEach(s=>{if((s.workers||[]).some(sw=>sw.id===workerId&&sw.attended))owed+=svcValue(s);});
+  services.forEach(s=>{
+    const sw=(s.workers||[]).find(sw=>sw.id===workerId&&sw.attended);
+    if(sw) owed += parseFloat(sw.value)||30;
+  });
   const paid=payments.filter(p=>p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
   return Math.max(0,Math.round((owed-paid)*100)/100);
 }
+
+function swValue(sw) { return parseFloat(sw?.value)||30; }
 
 // ── STATUS CHIP ────────────────────────────────────────────────────────────
 function statusChip(sw) {
@@ -594,7 +613,7 @@ function renderDash() {
               ${s.location?`<span>📍 ${s.location}</span>`:''}
               ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
               ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
-              <span style="color:var(--accent);font-weight:600">💶 ${svcValue(s)}€/colab.</span>
+
             </div>
           </div>
           <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap">
@@ -930,8 +949,7 @@ async function deleteWorker(id){
 }
 
 // ── SERVICES ───────────────────────────────────────────────────────────────
-function svcCard(s,showVal=false){
-  const val=svcValue(s);
+function svcCard(s){
   return `<div class="svc">
     <div class="svc-head">
       <div style="flex:1;min-width:0">
@@ -941,7 +959,7 @@ function svcCard(s,showVal=false){
           ${s.location?`<span>📍 ${s.location}</span>`:''}
           ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
           ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
-          ${showVal?`<span style="color:var(--accent);font-weight:600">💶 ${val}€</span>`:''}
+
         </div>
       </div>
       <div class="svc-actions">
@@ -981,13 +999,32 @@ function openServiceModal(id=null){
   document.getElementById('sf-notes').value=s?.notes||'';
   const box=document.getElementById('sf-workers');
   box.innerHTML=workers.length?workers.map(w=>{
-    const checked=s?.workers?.some(sw=>sw.id===w.id)?'checked':'';
-    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border)">
-      <input type="checkbox" id="sf-w-${w.id}" ${checked} style="accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0">
-      <label for="sf-w-${w.id}" style="flex:1;cursor:pointer;font-weight:500">${w.name}</label>
-      ${w.location?`<span style="font-size:12px;color:var(--muted)">${w.location}</span>`:''}
+    const ex=editingServiceId?services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id):null;
+    const checked=ex?'checked':'';
+    const exFuncs=ex?.funcoes||[];
+    const exVal=ex?.value||30;
+    return `<div style="border-bottom:1px solid var(--border);padding:10px 12px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <input type="checkbox" id="sf-w-${w.id}" ${checked} style="accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="toggleWorkerSection('${w.id}')">
+        <label for="sf-w-${w.id}" style="flex:1;cursor:pointer;font-weight:600">${w.name}</label>
+        ${w.location?`<span style="font-size:12px;color:var(--muted)">${w.location}</span>`:''}
+      </div>
+      <div id="sf-detail-${w.id}" style="display:${ex?'block':'none'};padding-left:25px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+          ${FUNCOES.map(f=>`
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:12px;padding:3px 8px;border-radius:20px;border:1px solid var(--border2);background:${exFuncs.includes(f.id)?'var(--accent-bg)':'var(--bg)'}">
+              <input type="checkbox" id="sf-f-${w.id}-${f.id}" ${exFuncs.includes(f.id)?'checked':''} style="accent-color:var(--accent);cursor:pointer">
+              ${f.label}
+            </label>`).join('')}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;color:var(--muted)">Valor:</span>
+          <input type="number" id="sf-v-${w.id}" value="${exVal}" min="0" step="0.5" style="width:80px;padding:5px 8px;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:13px">
+          <span style="font-size:12px;color:var(--muted)">€</span>
+        </div>
+      </div>
     </div>`;
-  }).join(''):'<div style="color:var(--muted);font-size:13px;padding:8px 0">Sem colaboradores ainda.</div>';
+  }).join(''):'<div style="color:var(--muted);font-size:13px;padding:12px">Sem colaboradores ainda.</div>';
   openM('m-service');
 }
 
@@ -996,14 +1033,16 @@ async function saveService(){
   if(!date){toast('Data obrigatória');return;}
   const selectedWorkers=workers.filter(w=>document.getElementById('sf-w-'+w.id)?.checked).map(w=>{
     const ex=editingServiceId?services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id):null;
-    return {id:w.id,confirmed:ex?.confirmed||false,attended:ex?.attended||false,unavailable:ex?.unavailable||false,
-      meetTime:ex?.meetTime||'',meetLocation:ex?.meetLocation||''};
+    const funcoes=FUNCOES.map(f=>f.id).filter(fid=>document.getElementById(`sf-f-${w.id}-${fid}`)?.checked);
+    const value=parseFloat(document.getElementById('sf-v-'+w.id)?.value)||30;
+    return {id:w.id,confirmed:ex?.confirmed||false,attended:ex?.attended||false,
+      unavailable:ex?.unavailable||false,meetTime:ex?.meetTime||'',
+      meetLocation:ex?.meetLocation||'',funcoes,value};
   });
   const data={deceased:document.getElementById('sf-deceased').value.trim(),date,
     location:document.getElementById('sf-loc').value.trim(),
     depositTime:document.getElementById('sf-deposit').value,
     funeralTime:document.getElementById('sf-funeral').value,
-    value:parseFloat(document.getElementById('sf-value').value)||30,
     notes:document.getElementById('sf-notes').value.trim(),workers:selectedWorkers};
   if(editingServiceId){
     await db.collection('services').doc(editingServiceId).update(data);
@@ -1024,7 +1063,6 @@ async function deleteSvc(id){
 
 function openDetail(id){
   const s=services.find(x=>x.id===id);
-  const val=svcValue(s);
   document.getElementById('m-detail-title').textContent=s.deceased||'Serviço';
   document.getElementById('m-detail-body').innerHTML=`
     <div style="padding:12px;background:var(--surface2);border-radius:var(--r);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted)">
@@ -1032,26 +1070,29 @@ function openDetail(id){
       ${s.location?`<span>📍 ${s.location}</span>`:''}
       ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
       ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
-      <span style="color:var(--accent);font-weight:600">💶 ${val}€/colab.</span>
     </div>
     <div style="overflow-x:auto">
     <table class="tbl">
-      <thead><tr><th>Colaborador</th><th>Encontro</th><th>Confirmou</th><th>Esteve</th><th>Pagamento</th></tr></thead>
+      <thead><tr><th>Colaborador</th><th>Funções</th><th>Encontro</th><th>Conf.</th><th>Esteve</th><th>Valor</th><th>Pago</th></tr></thead>
       <tbody>${(s.workers||[]).map(sw=>{
         const w=workerById(sw.id);
+        const val=swValue(sw);
         const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
         const meetT=sw.meetTime||subOneHour(s.funeralTime)||'';
         const meetL=sw.meetLocation||'Penso';
+        const funcs=(sw.funcoes||[]).map(fid=>FUNCOES.find(f=>f.id===fid)?.label||fid).join(', ')||'—';
         return `<tr>
-          <td style="font-weight:500">${w?.name||'?'}</td>
-          <td style="font-size:12px;color:var(--muted)">${meetT?meetT+' ':''}<br><span style="font-size:11px">${meetL}</span></td>
+          <td style="font-weight:500;white-space:nowrap">${w?.name||'?'}</td>
+          <td style="font-size:11px;color:var(--muted);max-width:140px">${funcs}</td>
+          <td style="font-size:11px;color:var(--muted);white-space:nowrap">${meetT||'—'}<br><span style="font-size:10px">${meetL}</span></td>
           <td><input type="checkbox" ${sw.confirmed?'checked':''} style="accent-color:var(--yellow);cursor:pointer" onchange="setStatus('${s.id}','${sw.id}','confirmed',this.checked)"></td>
           <td><input type="checkbox" ${sw.attended?'checked':''} style="accent-color:var(--green);cursor:pointer" onchange="setStatus('${s.id}','${sw.id}','attended',this.checked)"></td>
+          <td style="font-family:var(--mono);font-size:13px;color:var(--accent)">${val}€</td>
           <td style="font-family:var(--mono);font-size:12px;color:${!sw.attended?'var(--dim)':paid>=val?'var(--green)':'var(--red)'}">
-            ${!sw.attended?'—':paid>=val?'✓ Pago':val+'€ devido'}
+            ${!sw.attended?'—':paid>=val?'✓':val+'€'}
           </td>
         </tr>`;
-      }).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px">Sem colaboradores</td></tr>'}
+      }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">Sem colaboradores</td></tr>'}
       </tbody>
     </table></div>
     ${s.notes?`<div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:var(--r);font-size:12px;color:var(--muted);font-style:italic">${s.notes}</div>`:''}
@@ -1140,8 +1181,8 @@ async function markAllPaid(workerId){
   for(const s of services){
     for(const sw of (s.workers||[])){
       if(sw.id!==workerId||!sw.attended)continue;
+      const val=swValue(sw);
       const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
-      const val=svcValue(s);
       if(paid<val) batch.set(db.collection('payments').doc(),{workerId,serviceId:s.id,amount:val,paid:true,paidAt:FS.serverTimestamp()});
     }
   }
@@ -1149,10 +1190,11 @@ async function markAllPaid(workerId){
 }
 
 async function payAllAttended(serviceId){
-  const s=services.find(x=>x.id===serviceId);const val=svcValue(s);
+  const s=services.find(x=>x.id===serviceId);
   const batch=db.batch();
   for(const sw of (s.workers||[])){
     if(!sw.attended)continue;
+    const val=swValue(sw);
     const paid=payments.filter(p=>p.serviceId===serviceId&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
     if(paid<val) batch.set(db.collection('payments').doc(),{workerId:sw.id,serviceId,amount:val,paid:true,paidAt:FS.serverTimestamp()});
   }
@@ -1205,12 +1247,14 @@ function renderMyServices(){
     ${!myId?'<div class="empty"><div class="empty-icon">⚠️</div><p>Perfil não encontrado.<br>Contacta o administrador.</p></div>':
     myServices.length?myServices.map(s=>{
       const sw=s.workers.find(x=>x.id===myId);
-      const val=svcValue(s);
+      const val=swValue(sw);
       const meetT=sw.meetTime||subOneHour(s.funeralTime)||'';
       const meetL=sw.meetLocation||'Penso';
+      const funcs=(sw.funcoes||[]).map(fid=>FUNCOES.find(f=>f.id===fid)?.label||fid).join(' · ')||'';
       return `<div class="my-svc">
         <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin-bottom:3px">${fmtDate(s.date)}</div>
         <div style="font-weight:700;font-size:15px;margin-bottom:6px">${s.deceased||'Serviço'}</div>
+        ${funcs?`<div style="margin-bottom:8px;display:flex;flex-wrap:wrap;gap:4px">${(sw.funcoes||[]).map(fid=>`<span class="badge badge-accent" style="font-size:11px">${FUNCOES.find(f=>f.id===fid)?.label||fid}</span>`).join('')}</div>`:''}
         <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);margin-bottom:10px">
           ${s.location?`<span>📍 ${s.location}</span>`:''}
           ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
@@ -1242,11 +1286,12 @@ function renderMyPayments(){
   const me=myProfile();const myId=me?.id;
   const debt=myId?calcDebt(myId):0;
   const myPay=payments.filter(p=>p.workerId===myId&&p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
-  const attended=services.flatMap(s=>(s.workers||[]).filter(sw=>sw.id===myId&&sw.attended).map(()=>s));
+  const attendedSws=services.flatMap(s=>(s.workers||[]).filter(sw=>sw.id===myId&&sw.attended));
+  const totalEarned=attendedSws.reduce((a,sw)=>a+swValue(sw),0);
   document.getElementById('tab-my-payments').innerHTML=`
     <div class="page-hd"><div class="page-title">Os meus pagamentos</div></div>
     <div class="stats-row">
-      <div class="stat"><div class="stat-val">${attended.length}</div><div class="stat-lbl">Serviços feitos</div></div>
+      <div class="stat"><div class="stat-val">${attendedSws.length}</div><div class="stat-lbl">Serviços feitos</div></div>
       <div class="stat"><div class="stat-val" style="color:${debt>0?'var(--red)':'var(--green)'}">${debt>0?debt+'€':'0€'}</div><div class="stat-lbl">${debt>0?'Por receber':'Em dia ✓'}</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--green)">${myPay.reduce((a,p)=>a+p.amount,0)}€</div><div class="stat-lbl">Total recebido</div></div>
     </div>
@@ -1254,8 +1299,13 @@ function renderMyPayments(){
     <div class="card">
       ${myPay.length?myPay.map(p=>{
         const s=services.find(x=>x.id===p.serviceId);
+        const sw=s?.workers?.find(sw=>sw.id===myId);
+        const funcs=(sw?.funcoes||[]).map(fid=>FUNCOES.find(f=>f.id===fid)?.label||fid).join(', ');
         return `<div class="pay-row">
-          <div class="pay-info"><div class="pay-name">${s?.deceased||'Serviço'}</div><div class="pay-detail">${s?fmtDate(s.date):''} · recebido em ${fmtTs(p.paidAt)}</div></div>
+          <div class="pay-info">
+            <div class="pay-name">${s?.deceased||'Serviço'}</div>
+            <div class="pay-detail">${s?fmtDate(s.date):''}${funcs?' · '+funcs:''} · recebido em ${fmtTs(p.paidAt)}</div>
+          </div>
           <div class="pay-amt ok">${p.amount}€</div>
         </div>`;
       }).join(''):'<div style="padding:14px 0;text-align:center;color:var(--muted);font-size:13px">Sem pagamentos registados ainda.</div>'}
