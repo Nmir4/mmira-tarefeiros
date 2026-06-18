@@ -397,10 +397,15 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 
 <div class="toast" id="toast"></div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
+window.onerror = function(msg,src,line){
+  document.getElementById('loading-screen').innerHTML='<div style="color:#e05555;font-size:14px;padding:20px;text-align:center">Erro: '+msg+'<br><small>'+src+':'+line+'</small></div>';
+  return false;
+};
+
 const fbConfig = {
   apiKey: "AIzaSyBF-aJAQTqG7xB4icmHV0nU2Jf_7LApM4c",
   authDomain: "mmira-tarefeiros.firebaseapp.com",
@@ -447,6 +452,14 @@ function subOneHour(t) {
 }
 
 // ── AUTH ───────────────────────────────────────────────────────────────────
+// Timeout fallback if Firebase never loads
+setTimeout(()=>{
+  const ls=document.getElementById('loading-screen');
+  if(ls&&ls.style.display!=='none'){
+    ls.innerHTML='<div style="text-align:center"><div style="color:#c8a96e;font-size:20px;font-weight:700;letter-spacing:.1em;margin-bottom:16px">MIRA · Tarefeiros</div><div style="color:#e05555;font-size:13px;margin-bottom:8px">Não foi possível ligar ao servidor.</div><div style="color:#777;font-size:12px;margin-bottom:20px">Verifica a ligação à internet e recarrega.</div><button onclick="location.reload()" style="padding:8px 20px;background:#c8a96e;color:#0f0f0f;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600">Recarregar</button></div>';
+  }
+},8000);
+
 auth.onAuthStateChanged(async user => {
   if (user) {
     currentUser = user;
