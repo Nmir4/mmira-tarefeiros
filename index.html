@@ -10,7 +10,7 @@
 :root{
   --bg:#0f0f0f;--surface:#181818;--surface2:#212121;--surface3:#2a2a2a;
   --border:#252525;--border2:#333;--text:#e8e8e8;--muted:#777;--dim:#444;
-  --accent:#c8a96e;--accent2:#a88a50;--accent-bg:#1e1a12;
+  --accent:#c8a96e;--accent-bg:#1e1a12;
   --green:#4caf6e;--green-bg:#0f1f14;
   --red:#e05555;--red-bg:#1f0f0f;
   --yellow:#d4a843;--yellow-bg:#1e1800;
@@ -20,62 +20,55 @@
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-/* ── LOADING ── */
 #loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
-#loading-screen .logo-lg{font-size:28px;font-weight:700;letter-spacing:.15em;color:var(--accent)}
-#loading-screen .logo-lg span{color:var(--muted);font-weight:300}
-.spinner{width:28px;height:28px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+.logo-lg{font-size:26px;font-weight:700;letter-spacing:.15em;color:var(--accent)}
+.logo-lg span{color:var(--muted);font-weight:300}
+.spinner{width:26px;height:26px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── LOGIN ── */
 #login-screen{display:none;position:fixed;inset:0;background:var(--bg);align-items:center;justify-content:center;padding:20px}
 #login-screen.visible{display:flex}
-.login-box{width:100%;max-width:380px}
-.login-logo{font-size:22px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.login-box{width:100%;max-width:360px}
+.login-logo{font-size:20px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
 .login-logo span{color:var(--muted);font-weight:300}
-.login-sub{font-size:13px;color:var(--muted);margin-bottom:32px}
-.login-box .field{margin-bottom:14px}
-.login-box label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
-.login-box input{width:100%;padding:11px 14px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+.login-box .field{margin-bottom:13px}
+.login-box label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.login-box input{width:100%;padding:10px 13px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
 .login-box input:focus{outline:none;border-color:var(--accent)}
 .login-err{color:var(--red);font-size:12px;margin-top:8px;min-height:18px}
 
-/* ── APP SHELL ── */
 #app{display:none;flex-direction:column;height:100vh}
 #app.visible{display:flex}
-.topbar{display:flex;align-items:center;gap:12px;padding:0 16px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
-.logo{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;white-space:nowrap}
+.topbar{display:flex;align-items:center;gap:10px;padding:0 16px;height:50px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.logo{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
 .logo span{color:var(--muted);font-weight:400}
 .user-badge{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 .user-badge strong{color:var(--text);font-weight:500}
 .role-pill{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .role-admin{background:var(--accent-bg);color:var(--accent)}
 .role-worker{background:var(--blue-bg);color:var(--blue)}
-.nav{display:flex;gap:2px;background:var(--surface);border-bottom:1px solid var(--border);padding:0 12px;flex-shrink:0;overflow-x:auto}
+.nav{display:flex;gap:1px;background:var(--surface);border-bottom:1px solid var(--border);padding:0 12px;flex-shrink:0;overflow-x:auto}
 .nav::-webkit-scrollbar{display:none}
-.nav-btn{padding:10px 14px;border:none;background:none;color:var(--muted);font-family:var(--font);font-size:13px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;position:relative}
+.nav-btn{padding:10px 13px;border:none;background:none;color:var(--muted);font-family:var(--font);font-size:13px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;position:relative}
 .nav-btn:hover{color:var(--text)}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
-.notif-dot{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--red)}
-.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:860px;width:100%;margin:0 auto}
+.notif-dot{position:absolute;top:7px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:880px;width:100%;margin:0 auto}
 
-/* ── VIEWS ── */
 .view{display:none}.view.active{display:block}
-
-/* ── GENERIC UI ── */
 .page-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
 .page-title{font-size:17px;font-weight:600}
 .page-title small{font-size:12px;color:var(--muted);font-weight:400;display:block;margin-top:1px}
 
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:var(--r);border:none;font-family:var(--font);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r);border:none;font-family:var(--font);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-decoration:none;white-space:nowrap}
 .btn-primary{background:var(--accent);color:#0f0f0f}.btn-primary:hover{background:#d9bb80}
 .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .btn-danger{background:var(--red-bg);color:var(--red);border:1px solid #3a1818}.btn-danger:hover{background:#2a1010}
-.btn-green{background:var(--green-bg);color:var(--green);border:1px solid #1a3a22}.btn-green:hover{background:#142a1a}
+.btn-green{background:var(--green-bg);color:var(--green);border:1px solid #1a3a22}
 .btn-wa{background:#0d2010;color:#4caf6e;border:1px solid #1a4020}.btn-wa:hover{background:#122818}
 .btn-sm{padding:5px 11px;font-size:12px}
 .btn-xs{padding:3px 9px;font-size:11px}
-.btn[disabled]{opacity:.4;cursor:default;pointer-events:none}
 
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
 .badge-green{background:var(--green-bg);color:var(--green)}
@@ -86,21 +79,20 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .badge-accent{background:var(--accent-bg);color:var(--accent)}
 
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px;cursor:default}
 .stat-val{font-size:24px;font-weight:700;font-family:var(--mono);color:var(--accent)}
 .stat-lbl{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
 
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:10px}
 .section-lbl{font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 10px}
 
-/* ── MODALS ── */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:center;justify-content:center;padding:16px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;align-items:center;justify-content:center;padding:16px}
 .overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r3);width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
-.modal-lg{max-width:560px}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r3);width:100%;max-width:500px;max-height:92vh;overflow-y:auto}
+.modal-lg{max-width:580px}
 .modal-hd{padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between}
 .modal-title{font-size:15px;font-weight:600}
-.x-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;padding:2px 4px}.x-btn:hover{color:var(--text)}
+.x-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;padding:2px 6px}.x-btn:hover{color:var(--text)}
 .modal-body{padding:18px}
 .modal-foot{padding:0 18px 18px;display:flex;gap:8px;justify-content:flex-end}
 
@@ -108,156 +100,148 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
 .field input,.field select,.field textarea{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font);font-size:14px;transition:border .15s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-.field textarea{min-height:80px;resize:vertical}
+.field textarea{min-height:72px;resize:vertical}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.field-hint{font-size:11px;color:var(--dim);margin-top:4px}
 
-/* ── WORKER CARD ── */
-.w-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:8px;transition:border-color .15s}
-.w-card:hover{border-color:var(--border2)}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--accent);flex-shrink:0}
-.w-info{flex:1;min-width:0}
-.w-name{font-weight:600;font-size:14px}
-.w-meta{font-size:12px;color:var(--muted);margin-top:2px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.w-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
-
-/* ── SERVICE CARD ── */
+/* SERVICE CARD */
 .svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:10px;overflow:hidden}
-.svc-head{padding:13px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border)}
-.svc-date{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500}
-.svc-loc{font-weight:600;margin-top:1px}
-.svc-note{font-size:12px;color:var(--muted);margin-top:2px}
-.svc-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
-.svc-body{padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.svc-head{padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.svc-deceased{font-weight:700;font-size:15px;color:var(--text)}
+.svc-date{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:4px;font-weight:500}
+.svc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
+.svc-meta-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.svc-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;align-items:flex-start}
+.svc-divider{height:1px;background:var(--border);margin:0 16px}
+.svc-body{padding:11px 16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+
 .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;background:var(--surface2);border:1px solid var(--border)}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .dot-g{background:var(--green)}.dot-y{background:var(--yellow)}.dot-r{background:var(--red)}.dot-d{background:var(--dim)}
 
-/* ── PAYMENT ROWS ── */
+/* WORKER CARD */
+.w-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:8px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--accent);flex-shrink:0}
+.w-info{flex:1;min-width:0}
+.w-name{font-weight:600}
+.w-meta{font-size:12px;color:var(--muted);margin-top:2px;display:flex;flex-wrap:wrap;gap:8px}
+.w-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+
+/* PAYMENT */
 .pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:10px}
 .pay-row:last-child{border-bottom:none}
 .pay-info{flex:1}
 .pay-name{font-weight:600}
 .pay-detail{font-size:12px;color:var(--muted);margin-top:1px}
-.pay-amt{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--red);white-space:nowrap}
+.pay-amt{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--red)}
 .pay-amt.ok{color:var(--green)}
 
-/* ── REQUEST CARD ── */
+/* REQUEST */
 .req-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px}
 .req-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
-.req-name{font-weight:600;font-size:13px}
-.req-date{font-size:11px;color:var(--muted)}
-.req-msg{font-size:13px;color:var(--text);background:var(--surface2);padding:10px 12px;border-radius:var(--r);margin-bottom:10px;line-height:1.6}
-.req-admin-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:6px}
+.req-msg{font-size:13px;background:var(--surface2);padding:10px 12px;border-radius:var(--r);line-height:1.6;margin-bottom:8px}
 
-/* ── WORKER PORTAL ── */
+/* WORKER PORTAL */
 .my-svc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
-.my-svc-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
-.my-svc-date{font-family:var(--mono);font-size:12px;color:var(--accent)}
-.my-svc-loc{font-weight:600;margin-top:2px}
-.my-svc-time{font-size:12px;color:var(--muted);margin-top:2px}
+.my-svc-name{font-weight:700;font-size:15px;margin-bottom:4px}
+.my-svc-meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
 
-/* ── WA PREVIEW ── */
-.wa-preview{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:13px;font-size:13px;line-height:1.65;color:var(--text);white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+.wa-preview{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:13px;font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
 .wa-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
 .wa-row:last-child{border-bottom:none}
 
-/* ── EMPTY ── */
 .empty{text-align:center;padding:40px 20px;color:var(--muted)}
 .empty-icon{font-size:32px;margin-bottom:10px;opacity:.35}
 
-/* ── TOAST ── */
 .toast{position:fixed;bottom:20px;right:16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 16px;border-radius:var(--r);font-size:13px;z-index:9999;transform:translateY(70px);opacity:0;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.5);pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* ── RESPONSIVE ── */
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.tbl td{padding:10px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+
 @media(max-width:600px){
   .topbar{padding:0 12px}.content{padding:14px 12px}
   .stats{grid-template-columns:repeat(2,1fr)}
-  .field-row{grid-template-columns:1fr}
-  .w-actions,.svc-actions{gap:4px}
+  .field-row,.field-row3{grid-template-columns:1fr}
   .page-hd{flex-direction:column;align-items:flex-start}
-  .btn{font-size:12px;padding:7px 12px}
+  .svc-head{flex-direction:column}
+  .svc-actions{flex-direction:row}
 }
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div id="loading-screen">
   <div class="logo-lg">MIRA <span>· Tarefeiros</span></div>
   <div class="spinner"></div>
 </div>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">MIRA <span>· Tarefeiros</span></div>
-    <div class="login-sub">Gestão de colaboradores em serviços fúnebres</div>
-    <div class="field"><label>Email</label><input type="email" id="l-email" placeholder="email@exemplo.com" autocomplete="username"></div>
-    <div class="field"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="login-sub">Agência Funerária Mira — Melgaço</div>
+    <div class="field"><label>Email</label><input type="email" id="l-email" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input type="password" id="l-pass" autocomplete="current-password"></div>
     <div class="login-err" id="l-err"></div>
-    <button class="btn btn-primary" style="width:100%;margin-top:4px;justify-content:center;padding:11px" onclick="doLogin()">Entrar</button>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;margin-top:4px" onclick="doLogin()">Entrar</button>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <header class="topbar">
     <div class="logo">MIRA <span>· Tarefeiros</span></div>
     <div class="user-badge">
-      <span id="ub-name"></span>
+      <strong id="ub-name"></strong>
       <span class="role-pill" id="ub-role"></span>
       <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sair</button>
     </div>
   </header>
 
-  <!-- ADMIN NAV -->
   <nav class="nav" id="nav-admin" style="display:none">
     <button class="nav-btn active" onclick="showTab('dash')">Início</button>
     <button class="nav-btn" onclick="showTab('workers')">Pessoas</button>
     <button class="nav-btn" onclick="showTab('services')">Serviços</button>
     <button class="nav-btn" onclick="showTab('payments')">Pagamentos</button>
-    <button class="nav-btn" id="req-tab-btn" onclick="showTab('requests')">Pedidos <span class="notif-dot" id="req-dot" style="display:none"></span></button>
+    <button class="nav-btn" id="req-tab-btn" onclick="showTab('requests')">Pedidos<span class="notif-dot" id="req-dot" style="display:none"></span></button>
   </nav>
-
-  <!-- WORKER NAV -->
   <nav class="nav" id="nav-worker" style="display:none">
     <button class="nav-btn active" onclick="showTab('my-services')">Os meus serviços</button>
-    <button class="nav-btn" onclick="showTab('my-payments')">Os meus pagamentos</button>
-    <button class="nav-btn" onclick="showTab('my-requests')">Pedido de alteração</button>
+    <button class="nav-btn" onclick="showTab('my-payments')">Pagamentos</button>
+    <button class="nav-btn" onclick="showTab('my-requests')">Pedido</button>
   </nav>
 
   <main class="content">
-    <!-- ADMIN VIEWS -->
     <div id="tab-dash" class="view active"></div>
     <div id="tab-workers" class="view"></div>
     <div id="tab-services" class="view"></div>
     <div id="tab-payments" class="view"></div>
     <div id="tab-requests" class="view"></div>
-    <!-- WORKER VIEWS -->
     <div id="tab-my-services" class="view"></div>
     <div id="tab-my-payments" class="view"></div>
     <div id="tab-my-requests" class="view"></div>
   </main>
 </div>
 
-<!-- MODALS -->
-<!-- Worker Modal -->
+<!-- MODAL: Tarefeiro -->
 <div class="overlay" id="m-worker">
   <div class="modal">
     <div class="modal-hd"><div class="modal-title" id="m-worker-title">Novo Tarefeiro</div><button class="x-btn" onclick="closeM('m-worker')">×</button></div>
     <div class="modal-body">
-      <div class="field"><label>Nome completo</label><input id="wf-name" type="text" placeholder="Nome Apelido"></div>
-      <div class="field"><label>Email (usado para login)</label><input id="wf-email" type="email" placeholder="nome@email.com"></div>
-      <div class="field" id="wf-pass-field"><label>Password inicial</label><input id="wf-pass" type="text" placeholder="mínimo 6 caracteres" autocomplete="new-password"></div>
+      <div class="field"><label>Nome completo</label><input id="wf-name" type="text"></div>
+      <div class="field"><label>Email (usado para login)</label><input id="wf-email" type="email"></div>
+      <div class="field" id="wf-pass-wrap"><label>Password inicial</label><input id="wf-pass" type="text" autocomplete="new-password"><div class="field-hint">Mínimo 6 caracteres. O colaborador pode alterar depois.</div></div>
       <div class="field"><label>Telemóvel</label><input id="wf-phone" type="tel" placeholder="+351 9XX XXX XXX"></div>
       <div class="field-row">
-        <div class="field"><label>Localidade</label><input id="wf-loc" type="text" placeholder="ex: Melgaço"></div>
+        <div class="field"><label>Localidade</label><input id="wf-loc" type="text"></div>
         <div class="field"><label>Disponibilidade</label>
           <select id="wf-avail"><option value="alta">Alta</option><option value="media">Média</option><option value="baixa">Baixa</option></select>
         </div>
       </div>
-      <div class="field"><label>Notas</label><textarea id="wf-notes" placeholder="Observações..."></textarea></div>
+      <div class="field"><label>Notas</label><textarea id="wf-notes"></textarea></div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeM('m-worker')">Cancelar</button>
@@ -266,18 +250,26 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   </div>
 </div>
 
-<!-- Service Modal -->
+<!-- MODAL: Serviço -->
 <div class="overlay" id="m-service">
   <div class="modal modal-lg">
     <div class="modal-hd"><div class="modal-title" id="m-svc-title">Novo Serviço</div><button class="x-btn" onclick="closeM('m-service')">×</button></div>
     <div class="modal-body">
+      <div class="field"><label>Nome do falecido</label><input id="sf-deceased" type="text" placeholder="Nome completo"></div>
       <div class="field-row">
-        <div class="field"><label>Data</label><input id="sf-date" type="date"></div>
-        <div class="field"><label>Hora encontro</label><input id="sf-time" type="time" value="08:00"></div>
+        <div class="field"><label>Data do funeral</label><input id="sf-date" type="date"></div>
+        <div class="field"><label>Local / Igreja</label><input id="sf-loc" type="text" placeholder="ex: Igreja Matriz de Melgaço"></div>
       </div>
-      <div class="field"><label>Localidade / Igreja</label><input id="sf-loc" type="text" placeholder="ex: Melgaço — Igreja Matriz"></div>
-      <div class="field"><label>Notas</label><textarea id="sf-notes" placeholder="Informações adicionais..."></textarea></div>
-      <div class="field"><label>Tarefeiros convocados</label><div id="sf-workers" style="max-height:180px;overflow-y:auto"></div></div>
+      <div class="field-row3">
+        <div class="field"><label>Hora do depósito</label><input id="sf-deposit" type="time"><div class="field-hint">Opcional</div></div>
+        <div class="field"><label>Hora do funeral</label><input id="sf-funeral" type="time"></div>
+        <div class="field"><label>Valor por colaborador</label><input id="sf-value" type="number" min="0" step="0.5" value="30"><div class="field-hint">Default: 30€</div></div>
+      </div>
+      <div class="field"><label>Notas internas</label><textarea id="sf-notes" placeholder="Informações adicionais (não enviadas via WhatsApp)..."></textarea></div>
+      <div class="field">
+        <label>Colaboradores convocados</label>
+        <div id="sf-workers" style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);padding:4px 8px"></div>
+      </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeM('m-service')">Cancelar</button>
@@ -286,7 +278,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   </div>
 </div>
 
-<!-- Service Detail Modal -->
+<!-- MODAL: Detalhe serviço -->
 <div class="overlay" id="m-detail">
   <div class="modal modal-lg">
     <div class="modal-hd"><div class="modal-title" id="m-detail-title">Serviço</div><button class="x-btn" onclick="closeM('m-detail')">×</button></div>
@@ -295,7 +287,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   </div>
 </div>
 
-<!-- Convoke Modal -->
+<!-- MODAL: Convocar WA -->
 <div class="overlay" id="m-convoke">
   <div class="modal modal-lg">
     <div class="modal-hd"><div class="modal-title">Convocar via WhatsApp</div><button class="x-btn" onclick="closeM('m-convoke')">×</button></div>
@@ -304,13 +296,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
   </div>
 </div>
 
-<!-- Resolve Request Modal -->
+<!-- MODAL: Resolver pedido -->
 <div class="overlay" id="m-resolve">
   <div class="modal">
     <div class="modal-hd"><div class="modal-title">Responder ao pedido</div><button class="x-btn" onclick="closeM('m-resolve')">×</button></div>
     <div class="modal-body">
-      <div class="req-msg" id="resolve-msg-preview"></div>
-      <div class="field"><label>Nota de resposta (opcional)</label><textarea id="resolve-note" placeholder="Nota interna ou mensagem de resposta..."></textarea></div>
+      <div class="req-msg" id="resolve-preview"></div>
+      <div class="field"><label>Nota de resposta (opcional)</label><textarea id="resolve-note"></textarea></div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeM('m-resolve')">Cancelar</button>
@@ -321,14 +313,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
-
 <script>
-// ── FIREBASE INIT ─────────────────────────────────────────────────────────────
 const fbConfig = {
   apiKey: "AIzaSyBF-aJAQTqG7xB4icmHV0nU2Jf_7LApM4c",
   authDomain: "mmira-tarefeiros.firebaseapp.com",
@@ -341,60 +329,34 @@ firebase.initializeApp(fbConfig);
 const auth = firebase.auth();
 const db   = firebase.firestore();
 
-// ── ADMIN CONFIG ──────────────────────────────────────────────────────────────
-// First user to register automatically becomes admin.
-// Admin email stored in Firestore /config/admin
 const ADMIN_EMAIL = 'nicolaumira@gmail.com';
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let currentUser = null;
-let isAdmin = false;
-let currentTab = 'dash';
-let editingWorkerId = null;
-let editingServiceId = null;
-let resolvingRequestId = null;
-
-// Cache
-let workers = [];
-let services = [];
-let payments = [];
-let requests = [];
-
-// Firestore listeners
+let currentUser = null, isAdmin = false, currentTab = 'dash';
+let editingWorkerId = null, editingServiceId = null, resolvingRequestId = null;
+let workers = [], services = [], payments = [], requests = [];
 let unsubWorkers, unsubServices, unsubPayments, unsubRequests;
 
-// ── UTILS ─────────────────────────────────────────────────────────────────────
-const uid = () => db.collection('_').doc().id;
+// ── UTILS ──────────────────────────────────────────────────────────────────
 const initials = n => n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
-const fmtDate = d => { if(!d) return ''; const [y,m,day]=d.split('-'); return `${day}/${m}/${y}`; };
-const fmtTs = ts => { if(!ts) return ''; const d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleDateString('pt-PT'); };
-const toast = (msg, dur=2600) => {
-  const t = document.getElementById('toast'); t.textContent = msg;
-  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), dur);
-};
-const openM  = id => document.getElementById(id).classList.add('open');
-const closeM = id => document.getElementById(id).classList.remove('open');
+const fmtDate  = d => { if(!d) return ''; const [y,m,day]=d.split('-'); return `${day}/${m}/${y}`; };
+const fmtTs    = ts => { if(!ts) return ''; const d=ts.toDate?ts.toDate():new Date(ts); return d.toLocaleDateString('pt-PT'); };
+const toast    = (msg,dur=2600) => { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),dur); };
+const openM    = id => document.getElementById(id).classList.add('open');
+const closeM   = id => document.getElementById(id).classList.remove('open');
+const workerById = id => workers.find(w=>w.id===id);
 
-// ── AUTH ──────────────────────────────────────────────────────────────────────
+// ── AUTH ───────────────────────────────────────────────────────────────────
 auth.onAuthStateChanged(async user => {
   if (user) {
     currentUser = user;
-    // Check if admin
     try {
       const adminDoc = await db.doc('config/admin').get();
       isAdmin = adminDoc.exists ? adminDoc.data().adminUid === user.uid : user.email === ADMIN_EMAIL;
-      // If no admin doc yet and this is the admin email, create it
-      if (!adminDoc.exists && user.email === ADMIN_EMAIL) {
+      if (!adminDoc.exists && user.email === ADMIN_EMAIL)
         await db.doc('config/admin').set({ adminUid: user.uid, adminEmail: user.email });
-      }
-    } catch(e) {
-      isAdmin = user.email === ADMIN_EMAIL;
-    }
+    } catch(e) { isAdmin = user.email === ADMIN_EMAIL; }
     showApp();
-  } else {
-    currentUser = null; isAdmin = false;
-    showLogin();
-  }
+  } else { currentUser = null; isAdmin = false; showLogin(); }
 });
 
 function showLogin() {
@@ -402,183 +364,169 @@ function showLogin() {
   document.getElementById('login-screen').classList.add('visible');
   document.getElementById('app').classList.remove('visible');
 }
-
 function showApp() {
   document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('login-screen').classList.remove('visible');
   document.getElementById('app').classList.add('visible');
-
   const name = currentUser.displayName || currentUser.email.split('@')[0];
   document.getElementById('ub-name').textContent = name;
   const rp = document.getElementById('ub-role');
   rp.textContent = isAdmin ? 'Admin' : 'Colaborador';
   rp.className = 'role-pill ' + (isAdmin ? 'role-admin' : 'role-worker');
-
   document.getElementById('nav-admin').style.display = isAdmin ? 'flex' : 'none';
   document.getElementById('nav-worker').style.display = isAdmin ? 'none' : 'flex';
-
   setupListeners();
   showTab(isAdmin ? 'dash' : 'my-services');
 }
-
 async function doLogin() {
   const email = document.getElementById('l-email').value.trim();
   const pass  = document.getElementById('l-pass').value;
   document.getElementById('l-err').textContent = '';
   if (!email || !pass) { document.getElementById('l-err').textContent = 'Preenche email e password.'; return; }
-  try {
-    await auth.signInWithEmailAndPassword(email, pass);
-  } catch(e) {
-    const msgs = {
-      'auth/user-not-found': 'Email não encontrado.',
-      'auth/wrong-password': 'Password incorreta.',
-      'auth/invalid-email': 'Email inválido.',
-      'auth/invalid-credential': 'Credenciais inválidas.',
-      'auth/too-many-requests': 'Muitas tentativas. Aguarda uns minutos.'
-    };
-    document.getElementById('l-err').textContent = msgs[e.code] || 'Erro ao entrar. Tenta novamente.';
+  try { await auth.signInWithEmailAndPassword(email, pass); }
+  catch(e) {
+    const m = {'auth/user-not-found':'Email não encontrado.','auth/wrong-password':'Password incorreta.',
+      'auth/invalid-email':'Email inválido.','auth/invalid-credential':'Credenciais inválidas.',
+      'auth/too-many-requests':'Demasiadas tentativas. Aguarda uns minutos.'};
+    document.getElementById('l-err').textContent = m[e.code] || 'Erro ao entrar.';
   }
 }
-
 function doLogout() {
-  if (unsubWorkers) unsubWorkers();
-  if (unsubServices) unsubServices();
-  if (unsubPayments) unsubPayments();
-  if (unsubRequests) unsubRequests();
+  [unsubWorkers,unsubServices,unsubPayments,unsubRequests].forEach(u=>u&&u());
   auth.signOut();
 }
-
 document.getElementById('l-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 document.getElementById('l-email').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('l-pass').focus(); });
 
-// ── FIRESTORE LISTENERS ───────────────────────────────────────────────────────
+// ── LISTENERS ──────────────────────────────────────────────────────────────
 function setupListeners() {
-  unsubWorkers = db.collection('workers').orderBy('name').onSnapshot(snap => {
-    workers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderCurrent();
-  });
-  unsubServices = db.collection('services').orderBy('date','desc').onSnapshot(snap => {
-    services = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderCurrent();
-  });
-  unsubPayments = db.collection('payments').onSnapshot(snap => {
-    payments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderCurrent();
-  });
+  unsubWorkers  = db.collection('workers').orderBy('name').onSnapshot(s => { workers = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
+  unsubServices = db.collection('services').orderBy('date','desc').onSnapshot(s => { services = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
+  unsubPayments = db.collection('payments').onSnapshot(s => { payments = s.docs.map(d=>({id:d.id,...d.data()})); renderCurrent(); });
   if (isAdmin) {
-    unsubRequests = db.collection('requests').orderBy('createdAt','desc').onSnapshot(snap => {
-      requests = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      const pending = requests.filter(r=>r.status==='pending').length;
-      document.getElementById('req-dot').style.display = pending > 0 ? 'block' : 'none';
+    unsubRequests = db.collection('requests').orderBy('createdAt','desc').onSnapshot(s => {
+      requests = s.docs.map(d=>({id:d.id,...d.data()}));
+      document.getElementById('req-dot').style.display = requests.filter(r=>r.status==='pending').length > 0 ? 'block' : 'none';
       renderCurrent();
     });
   }
 }
 
-// ── TAB NAVIGATION ────────────────────────────────────────────────────────────
+// ── NAV ────────────────────────────────────────────────────────────────────
 function showTab(tab) {
   currentTab = tab;
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('tab-'+tab)?.classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const navMap = {
-    'dash':0,'workers':1,'services':2,'payments':3,'requests':4,
-    'my-services':0,'my-payments':1,'my-requests':2
-  };
-  const nav = document.getElementById(isAdmin ? 'nav-admin' : 'nav-worker');
-  const btns = nav.querySelectorAll('.nav-btn');
-  if(btns[navMap[tab]]) btns[navMap[tab]].classList.add('active');
+  const navMap = {'dash':0,'workers':1,'services':2,'payments':3,'requests':4,'my-services':0,'my-payments':1,'my-requests':2};
+  const nav = document.getElementById(isAdmin?'nav-admin':'nav-worker');
+  nav.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===navMap[tab]));
   renderCurrent();
 }
-
 function renderCurrent() {
   if (!currentUser) return;
-  const renders = {
-    'dash': renderDash, 'workers': renderWorkers, 'services': renderServices,
-    'payments': renderPayments, 'requests': renderRequests,
-    'my-services': renderMyServices, 'my-payments': renderMyPayments, 'my-requests': renderMyRequests
-  };
-  renders[currentTab]?.();
+  ({dash:renderDash,workers:renderWorkers,services:renderServices,payments:renderPayments,
+    requests:renderRequests,'my-services':renderMyServices,'my-payments':renderMyPayments,'my-requests':renderMyRequests})[currentTab]?.();
 }
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-function workerById(id) { return workers.find(w=>w.id===id); }
-
+// ── PAYMENT HELPERS ────────────────────────────────────────────────────────
+function svcValue(s) { return parseFloat(s.value) || 30; }
 function calcDebt(workerId) {
-  const attended = services.flatMap(s => (s.workers||[]).filter(sw=>sw.id===workerId && sw.attended)).length;
-  const paid = payments.filter(p=>p.workerId===workerId && p.paid).reduce((a,p)=>a+p.amount,0);
-  return Math.max(0, attended*30 - paid);
+  let owed = 0;
+  services.forEach(s => { if((s.workers||[]).some(sw=>sw.id===workerId&&sw.attended)) owed += svcValue(s); });
+  const paid = payments.filter(p=>p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
+  return Math.max(0, Math.round((owed - paid)*100)/100);
 }
 
-function availBadge(a) {
-  if(a==='alta') return '<span class="badge badge-green">Alta disponibilidade</span>';
-  if(a==='media') return '<span class="badge badge-yellow">Média disponibilidade</span>';
-  return '<span class="badge badge-red">Baixa disponibilidade</span>';
+// ── SERVICE CARD ───────────────────────────────────────────────────────────
+function svcCard(s, showValue=false) {
+  const val = svcValue(s);
+  return `<div class="svc">
+    <div class="svc-head">
+      <div style="flex:1;min-width:0">
+        <div class="svc-date">${fmtDate(s.date)}</div>
+        <div class="svc-deceased">${s.deceased||'Serviço sem nome'}</div>
+        <div class="svc-meta">
+          ${s.location?`<span class="svc-meta-item">📍 ${s.location}</span>`:''}
+          ${s.depositTime?`<span class="svc-meta-item">⚰️ Depósito ${s.depositTime}</span>`:''}
+          ${s.funeralTime?`<span class="svc-meta-item">🕐 Funeral ${s.funeralTime}</span>`:''}
+          ${showValue&&val?`<span class="svc-meta-item" style="color:var(--accent);font-weight:600">💶 ${val}€/colab.</span>`:''}
+        </div>
+      </div>
+      <div class="svc-actions">
+        <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')">WA</button>
+        <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
+        <button class="btn btn-ghost btn-sm" onclick="openServiceModal('${s.id}')">✎</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSvc('${s.id}')">✕</button>
+      </div>
+    </div>
+    <div class="svc-divider"></div>
+    <div class="svc-body">
+      ${(s.workers||[]).length ? (s.workers).map(sw=>statusChip(sw)).join('') : '<span style="color:var(--dim);font-size:12px">Sem colaboradores convocados</span>'}
+    </div>
+  </div>`;
 }
 
 function statusChip(sw) {
-  const name = workerById(sw.id)?.name?.split(' ')[0] || '?';
-  if(sw.attended) return `<span class="chip"><span class="dot dot-g"></span>${name} <span style="color:var(--green);font-size:11px;margin-left:3px">✓</span></span>`;
-  if(sw.confirmed) return `<span class="chip"><span class="dot dot-y"></span>${name} <span style="color:var(--yellow);font-size:11px;margin-left:3px">conf.</span></span>`;
+  const name = workerById(sw.id)?.name?.split(' ')[0]||'?';
+  if(sw.attended) return `<span class="chip"><span class="dot dot-g"></span>${name} <span style="color:var(--green);font-size:11px;margin-left:2px">✓</span></span>`;
+  if(sw.confirmed) return `<span class="chip"><span class="dot dot-y"></span>${name} <span style="color:var(--yellow);font-size:11px;margin-left:2px">conf.</span></span>`;
   return `<span class="chip"><span class="dot dot-d"></span>${name}</span>`;
 }
 
-// ── ADMIN: DASHBOARD ──────────────────────────────────────────────────────────
+// ── DASHBOARD ──────────────────────────────────────────────────────────────
 function renderDash() {
   const totalDebt = workers.reduce((a,w)=>a+calcDebt(w.id),0);
   const totalPaid = payments.filter(p=>p.paid).reduce((a,p)=>a+p.amount,0);
-  const pending = requests.filter(r=>r.status==='pending').length;
-
-  const recent = services.slice(0,5);
-  const debtors = workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
-
+  const pending   = requests.filter(r=>r.status==='pending').length;
+  const recent    = services.slice(0,5);
+  const debtors   = workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
   document.getElementById('tab-dash').innerHTML = `
     <div class="page-hd">
       <div class="page-title">Painel Geral</div>
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
     <div class="stats">
-      <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Tarefeiros</div></div>
+      <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Colaboradores</div></div>
       <div class="stat"><div class="stat-val">${services.length}</div><div class="stat-lbl">Serviços</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--red)">${totalDebt}€</div><div class="stat-lbl">Em dívida</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--green)">${totalPaid}€</div><div class="stat-lbl">Pago total</div></div>
-      ${pending > 0 ? `<div class="stat" style="cursor:pointer" onclick="showTab('requests')"><div class="stat-val" style="color:var(--yellow)">${pending}</div><div class="stat-lbl">Pedidos pendentes</div></div>` : ''}
+      ${pending>0?`<div class="stat" style="cursor:pointer" onclick="showTab('requests')"><div class="stat-val" style="color:var(--yellow)">${pending}</div><div class="stat-lbl">Pedidos pendentes</div></div>`:''}
     </div>
     <div class="section-lbl">Serviços recentes</div>
-    ${recent.length ? recent.map(svcCard).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços ainda.</p></div>'}
-    ${debtors.length ? `<div class="section-lbl">Dívidas pendentes</div><div class="card">${debtors.map(({w,d})=>`
+    ${recent.length ? recent.map(s=>svcCard(s,true)).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços ainda.</p></div>'}
+    ${debtors.length?`<div class="section-lbl">Dívidas pendentes</div><div class="card">${debtors.map(({w,d})=>`
       <div class="pay-row">
-        <div class="pay-info"><div class="pay-name">${w.name}</div></div>
+        <div class="pay-info"><div class="pay-name">${w.name}</div><div class="pay-detail">${w.phone||''}</div></div>
         <div style="display:flex;align-items:center;gap:10px">
           <div class="pay-amt">${d}€</div>
           <button class="btn btn-primary btn-sm" onclick="markAllPaid('${w.id}')">Pagar</button>
         </div>
-      </div>`).join('')}</div>` : ''}
+      </div>`).join('')}</div>`:''}
   `;
 }
 
-// ── ADMIN: WORKERS ────────────────────────────────────────────────────────────
+// ── WORKERS ────────────────────────────────────────────────────────────────
 function renderWorkers() {
-  const el = document.getElementById('tab-workers');
-  el.innerHTML = `
+  document.getElementById('tab-workers').innerHTML = `
     <div class="page-hd">
-      <div class="page-title">Tarefeiros<small>Gerir colaboradores e acessos</small></div>
+      <div class="page-title">Colaboradores<small>Gestão de tarefeiros e acessos</small></div>
       <button class="btn btn-primary" onclick="openWorkerModal()">+ Adicionar</button>
     </div>
-    ${workers.length ? workers.map(w => {
+    ${workers.length ? workers.map(w=>{
       const svcCount = services.filter(s=>(s.workers||[]).some(sw=>sw.id===w.id&&sw.attended)).length;
       const debt = calcDebt(w.id);
+      const avBadge = w.avail==='alta'?'badge-green':w.avail==='media'?'badge-yellow':'badge-red';
+      const avLabel = w.avail==='alta'?'Alta':w.avail==='media'?'Média':'Baixa';
       return `<div class="w-card">
         <div class="avatar">${initials(w.name)}</div>
         <div class="w-info">
           <div class="w-name">${w.name}</div>
           <div class="w-meta">
-            ${availBadge(w.avail)}
+            <span class="badge ${avBadge}" style="font-size:10px">${avLabel}</span>
             ${w.phone?`<span>📞 ${w.phone}</span>`:''}
             ${w.location?`<span>📍 ${w.location}</span>`:''}
             <span>✔ ${svcCount} serviço${svcCount!==1?'s':''}</span>
             ${debt>0?`<span style="color:var(--red)">💶 ${debt}€</span>`:''}
-            ${w.email?`<span style="color:var(--dim);font-size:11px">${w.email}</span>`:''}
           </div>
           ${w.notes?`<div style="font-size:12px;color:var(--dim);margin-top:3px">${w.notes}</div>`:''}
         </div>
@@ -588,14 +536,14 @@ function renderWorkers() {
           <button class="btn btn-danger btn-sm" onclick="deleteWorker('${w.id}')">✕</button>
         </div>
       </div>`;
-    }).join('') : '<div class="empty"><div class="empty-icon">👤</div><p>Sem tarefeiros. Adiciona o primeiro.</p></div>'}
+    }).join('') : '<div class="empty"><div class="empty-icon">👤</div><p>Sem colaboradores. Adiciona o primeiro.</p></div>'}
   `;
 }
 
 function openWorkerModal(id=null) {
   editingWorkerId = id;
-  document.getElementById('m-worker-title').textContent = id ? 'Editar Tarefeiro' : 'Novo Tarefeiro';
-  document.getElementById('wf-pass-field').style.display = id ? 'none' : 'block';
+  document.getElementById('m-worker-title').textContent = id ? 'Editar Colaborador' : 'Novo Colaborador';
+  document.getElementById('wf-pass-wrap').style.display = id ? 'none' : 'block';
   const w = id ? workerById(id) : null;
   document.getElementById('wf-name').value  = w?.name||'';
   document.getElementById('wf-email').value = w?.email||'';
@@ -605,7 +553,7 @@ function openWorkerModal(id=null) {
   document.getElementById('wf-avail').value = w?.avail||'alta';
   document.getElementById('wf-notes').value = w?.notes||'';
   openM('m-worker');
-  setTimeout(()=>document.getElementById('wf-name').focus(),120);
+  setTimeout(()=>document.getElementById('wf-name').focus(),100);
 }
 
 async function saveWorker() {
@@ -613,104 +561,71 @@ async function saveWorker() {
   const email = document.getElementById('wf-email').value.trim();
   const pass  = document.getElementById('wf-pass').value;
   if (!name) { toast('Nome obrigatório'); return; }
-
-  const data = {
-    name, email,
-    phone:    document.getElementById('wf-phone').value.trim(),
+  const data = { name, email, phone: document.getElementById('wf-phone').value.trim(),
     location: document.getElementById('wf-loc').value.trim(),
-    avail:    document.getElementById('wf-avail').value,
-    notes:    document.getElementById('wf-notes').value.trim(),
-  };
-
+    avail: document.getElementById('wf-avail').value,
+    notes: document.getElementById('wf-notes').value.trim() };
   try {
     if (editingWorkerId) {
       await db.collection('workers').doc(editingWorkerId).update(data);
-      toast('Tarefeiro atualizado ✓');
+      toast('Colaborador atualizado ✓');
     } else {
-      if (!email) { toast('Email obrigatório para criar conta'); return; }
+      if (!email) { toast('Email obrigatório'); return; }
       if (pass.length < 6) { toast('Password mínimo 6 caracteres'); return; }
-      // Create Firebase Auth account via Admin SDK workaround:
-      // We use a secondary app instance to create the user without logging out the admin
-      const secondaryApp = firebase.initializeApp(fbConfig, 'secondary_' + Date.now());
-      const secondaryAuth = secondaryApp.auth();
+      const sec = firebase.initializeApp(fbConfig, 'sec_'+Date.now());
       try {
-        const cred = await secondaryAuth.createUserWithEmailAndPassword(email, pass);
+        const cred = await sec.auth().createUserWithEmailAndPassword(email, pass);
         await cred.user.updateProfile({ displayName: name });
         data.uid = cred.user.uid;
         data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
         await db.collection('workers').add(data);
-        toast('Tarefeiro criado ✓ — pode fazer login com ' + email);
-      } finally {
-        await secondaryApp.delete();
-      }
+        toast('Colaborador criado ✓ — login: ' + email);
+      } finally { await sec.delete(); }
     }
     closeM('m-worker');
   } catch(e) {
-    const msgs = {
-      'auth/email-already-in-use': 'Este email já tem conta.',
-      'auth/invalid-email': 'Email inválido.',
-      'auth/weak-password': 'Password demasiado fraca.'
-    };
-    toast(msgs[e.code] || 'Erro: ' + e.message);
+    const m={'auth/email-already-in-use':'Email já existe.','auth/invalid-email':'Email inválido.','auth/weak-password':'Password fraca.'};
+    toast(m[e.code]||'Erro: '+e.message);
   }
 }
 
 async function deleteWorker(id) {
-  if (!confirm('Eliminar tarefeiro? Os registos históricos são mantidos.')) return;
+  if (!confirm('Eliminar colaborador?')) return;
   await db.collection('workers').doc(id).delete();
   toast('Eliminado');
 }
 
-// ── ADMIN: SERVICES ───────────────────────────────────────────────────────────
+// ── SERVICES ───────────────────────────────────────────────────────────────
 function renderServices() {
   document.getElementById('tab-services').innerHTML = `
     <div class="page-hd">
       <div class="page-title">Serviços<small>Histórico e gestão</small></div>
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
-    ${services.length ? services.map(svcCard).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços registados.</p></div>'}
+    ${services.length ? services.map(s=>svcCard(s,true)).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Sem serviços registados.</p></div>'}
   `;
-}
-
-function svcCard(s) {
-  return `<div class="svc">
-    <div class="svc-head">
-      <div>
-        <div class="svc-date">${fmtDate(s.date)}${s.time?' · '+s.time:''}</div>
-        <div class="svc-loc">${s.location||'Serviço sem localização'}</div>
-        ${s.notes?`<div class="svc-note">${s.notes}</div>`:''}
-      </div>
-      <div class="svc-actions">
-        <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')">WA</button>
-        <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
-        <button class="btn btn-ghost btn-sm" onclick="openServiceModal('${s.id}')">✎</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteSvc('${s.id}')">✕</button>
-      </div>
-    </div>
-    <div class="svc-body">
-      ${(s.workers||[]).length ? (s.workers).map(sw=>statusChip(sw)).join('') : '<span style="color:var(--dim);font-size:12px">Sem tarefeiros convocados</span>'}
-    </div>
-  </div>`;
 }
 
 function openServiceModal(id=null) {
   editingServiceId = id;
   document.getElementById('m-svc-title').textContent = id ? 'Editar Serviço' : 'Novo Serviço';
   const s = id ? services.find(x=>x.id===id) : null;
-  document.getElementById('sf-date').value  = s?.date || new Date().toISOString().slice(0,10);
-  document.getElementById('sf-time').value  = s?.time || '08:00';
-  document.getElementById('sf-loc').value   = s?.location || '';
-  document.getElementById('sf-notes').value = s?.notes || '';
+  document.getElementById('sf-deceased').value = s?.deceased||'';
+  document.getElementById('sf-date').value     = s?.date||new Date().toISOString().slice(0,10);
+  document.getElementById('sf-loc').value      = s?.location||'';
+  document.getElementById('sf-deposit').value  = s?.depositTime||'';
+  document.getElementById('sf-funeral').value  = s?.funeralTime||'';
+  document.getElementById('sf-value').value    = s?.value||30;
+  document.getElementById('sf-notes').value    = s?.notes||'';
   const box = document.getElementById('sf-workers');
-  if (!workers.length) { box.innerHTML = '<div style="color:var(--muted);font-size:13px">Sem tarefeiros ainda.</div>'; }
-  else box.innerHTML = workers.map(w => {
-    const checked = s?.workers?.some(sw=>sw.id===w.id) ? 'checked' : '';
-    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
-      <input type="checkbox" id="sf-w-${w.id}" ${checked} style="accent-color:var(--accent);width:15px;height:15px;cursor:pointer">
+  box.innerHTML = workers.length ? workers.map(w=>{
+    const checked = s?.workers?.some(sw=>sw.id===w.id)?'checked':'';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border)">
+      <input type="checkbox" id="sf-w-${w.id}" ${checked} style="accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0">
       <label for="sf-w-${w.id}" style="flex:1;cursor:pointer;font-weight:500">${w.name}</label>
       ${w.location?`<span style="font-size:12px;color:var(--muted)">${w.location}</span>`:''}
     </div>`;
-  }).join('');
+  }).join('') : '<div style="color:var(--muted);font-size:13px;padding:8px 0">Sem colaboradores ainda.</div>';
   openM('m-service');
 }
 
@@ -718,14 +633,17 @@ async function saveService() {
   const date = document.getElementById('sf-date').value;
   if (!date) { toast('Data obrigatória'); return; }
   const selectedWorkers = workers
-    .filter(w => document.getElementById('sf-w-'+w.id)?.checked)
-    .map(w => {
-      const existing = editingServiceId ? services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id) : null;
-      return { id: w.id, confirmed: existing?.confirmed||false, attended: existing?.attended||false };
+    .filter(w=>document.getElementById('sf-w-'+w.id)?.checked)
+    .map(w=>{
+      const ex = editingServiceId ? services.find(s=>s.id===editingServiceId)?.workers?.find(sw=>sw.id===w.id) : null;
+      return { id:w.id, confirmed:ex?.confirmed||false, attended:ex?.attended||false };
     });
   const data = {
-    date, time: document.getElementById('sf-time').value,
-    location: document.getElementById('sf-loc').value.trim(),
+    deceased: document.getElementById('sf-deceased').value.trim(),
+    date, location: document.getElementById('sf-loc').value.trim(),
+    depositTime: document.getElementById('sf-deposit').value,
+    funeralTime: document.getElementById('sf-funeral').value,
+    value: parseFloat(document.getElementById('sf-value').value)||30,
     notes: document.getElementById('sf-notes').value.trim(),
     workers: selectedWorkers
   };
@@ -748,58 +666,58 @@ async function deleteSvc(id) {
 
 async function toggleWorker(serviceId, workerId, field) {
   const s = services.find(x=>x.id===serviceId);
-  const updated = (s.workers||[]).map(sw =>
-    sw.id === workerId ? {...sw, [field]: !sw[field]} : sw
-  );
-  await db.collection('services').doc(serviceId).update({ workers: updated });
+  const updated = (s.workers||[]).map(sw=>sw.id===workerId?{...sw,[field]:!sw[field]}:sw);
+  await db.collection('services').doc(serviceId).update({workers:updated});
 }
 
 function openDetail(id) {
   const s = services.find(x=>x.id===id);
-  document.getElementById('m-detail-title').textContent = `${fmtDate(s.date)} · ${s.location||'Serviço'}`;
+  const val = svcValue(s);
+  document.getElementById('m-detail-title').textContent = s.deceased||'Serviço';
   document.getElementById('m-detail-body').innerHTML = `
+    <div style="margin-bottom:14px;padding:12px;background:var(--surface2);border-radius:var(--r)">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;display:flex;flex-wrap:wrap;gap:12px">
+        <span>📅 ${fmtDate(s.date)}</span>
+        ${s.location?`<span>📍 ${s.location}</span>`:''}
+        ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
+        ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
+        <span style="color:var(--accent);font-weight:600">💶 ${val}€ por colaborador</span>
+      </div>
+      ${s.notes?`<div style="font-size:12px;color:var(--muted);font-style:italic">${s.notes}</div>`:''}
+    </div>
     <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse">
-      <thead><tr>
-        <th style="text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Tarefeiro</th>
-        <th style="text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Confirmou</th>
-        <th style="text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Esteve presente</th>
-        <th style="text-align:left;padding:7px 10px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Pagamento</th>
-      </tr></thead>
+    <table class="tbl">
+      <thead><tr><th>Colaborador</th><th>Confirmou</th><th>Esteve presente</th><th>Pagamento</th></tr></thead>
       <tbody>
-        ${(s.workers||[]).map(sw => {
-          const w = workerById(sw.id);
-          const paid = payments.filter(p=>p.serviceId===s.id&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
+        ${(s.workers||[]).map(sw=>{
+          const w=workerById(sw.id);
+          const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
           return `<tr>
-            <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-weight:500">${w?.name||'?'}</td>
-            <td style="padding:10px 10px;border-bottom:1px solid var(--border)">
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-                <input type="checkbox" ${sw.confirmed?'checked':''} style="accent-color:var(--yellow);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','confirmed')">
-                <span style="font-size:12px;color:var(--muted)">Sim</span>
-              </label>
-            </td>
-            <td style="padding:10px 10px;border-bottom:1px solid var(--border)">
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-                <input type="checkbox" ${sw.attended?'checked':''} style="accent-color:var(--green);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','attended')">
-                <span style="font-size:12px;color:var(--muted)">Sim</span>
-              </label>
-            </td>
-            <td style="padding:10px 10px;border-bottom:1px solid var(--border)">
-              ${sw.attended ? `<span style="font-family:var(--mono);font-size:13px;color:${paid>=30?'var(--green)':'var(--red)'}">${paid>=30?'✓ Pago':'30€ devido'}</span>` : '<span style="color:var(--dim);font-size:12px">—</span>'}
+            <td style="font-weight:500">${w?.name||'?'}</td>
+            <td><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" ${sw.confirmed?'checked':''} style="accent-color:var(--yellow);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','confirmed')">
+              <span style="font-size:12px;color:var(--muted)">Sim</span>
+            </label></td>
+            <td><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" ${sw.attended?'checked':''} style="accent-color:var(--green);cursor:pointer" onchange="toggleWorker('${s.id}','${sw.id}','attended')">
+              <span style="font-size:12px;color:var(--muted)">Sim</span>
+            </label></td>
+            <td style="font-family:var(--mono);font-size:13px;color:${!sw.attended?'var(--dim)':paid>=val?'var(--green)':'var(--red)'}">
+              ${!sw.attended?'—':paid>=val?'✓ Pago':val+'€ devido'}
             </td>
           </tr>`;
-        }).join('') || '<tr><td colspan="4" style="padding:20px;text-align:center;color:var(--muted)">Sem tarefeiros</td></tr>'}
+        }).join('')||'<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">Sem colaboradores</td></tr>'}
       </tbody>
     </table>
     </div>
-    <div style="margin-top:14px;display:flex;gap:8px">
+    <div style="margin-top:14px">
       <button class="btn btn-primary btn-sm" onclick="payAllAttended('${s.id}')">Marcar todos como pagos</button>
     </div>
   `;
   openM('m-detail');
 }
 
-// ── ADMIN: PAYMENTS ───────────────────────────────────────────────────────────
+// ── PAYMENTS ───────────────────────────────────────────────────────────────
 function renderPayments() {
   const debtors = workers.map(w=>({w,d:calcDebt(w.id)})).filter(x=>x.d>0);
   const history = [...payments].filter(p=>p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
@@ -809,10 +727,7 @@ function renderPayments() {
     <div class="card">
       ${debtors.length ? debtors.map(({w,d})=>`
         <div class="pay-row">
-          <div class="pay-info">
-            <div class="pay-name">${w.name}</div>
-            <div class="pay-detail">${w.phone||''}</div>
-          </div>
+          <div class="pay-info"><div class="pay-name">${w.name}</div><div class="pay-detail">${w.phone||''}</div></div>
           <div style="display:flex;align-items:center;gap:10px">
             <div class="pay-amt">${d}€</div>
             <button class="btn btn-primary btn-sm" onclick="markAllPaid('${w.id}')">Pagar tudo</button>
@@ -826,7 +741,7 @@ function renderPayments() {
         return `<div class="pay-row">
           <div class="pay-info">
             <div class="pay-name">${w?.name||'?'}</div>
-            <div class="pay-detail">${s?`${fmtDate(s.date)} · ${s.location||''}`:''} · pago em ${fmtTs(p.paidAt)}</div>
+            <div class="pay-detail">${s?`${s.deceased?s.deceased+' · ':''}${fmtDate(s.date)}`:'—'} · pago em ${fmtTs(p.paidAt)}</div>
           </div>
           <div class="pay-amt ok">${p.amount}€</div>
         </div>`;
@@ -839,177 +754,175 @@ async function markAllPaid(workerId) {
   const batch = db.batch();
   for (const s of services) {
     for (const sw of (s.workers||[])) {
-      if (sw.id !== workerId || !sw.attended) continue;
-      const already = payments.filter(p=>p.serviceId===s.id&&p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
-      if (already < 30) {
-        const ref = db.collection('payments').doc();
-        batch.set(ref, { workerId, serviceId: s.id, amount: 30, paid: true, paidAt: firebase.firestore.FieldValue.serverTimestamp() });
+      if (sw.id!==workerId||!sw.attended) continue;
+      const paid=payments.filter(p=>p.serviceId===s.id&&p.workerId===workerId&&p.paid).reduce((a,p)=>a+p.amount,0);
+      const val=svcValue(s);
+      if (paid<val) {
+        batch.set(db.collection('payments').doc(), { workerId, serviceId:s.id, amount:val, paid:true, paidAt:firebase.firestore.FieldValue.serverTimestamp() });
       }
     }
   }
-  await batch.commit();
-  toast('Pagamentos registados ✓');
+  await batch.commit(); toast('Pagamentos registados ✓');
 }
 
 async function payAllAttended(serviceId) {
-  const s = services.find(x=>x.id===serviceId);
-  const batch = db.batch();
+  const s=services.find(x=>x.id===serviceId); const val=svcValue(s);
+  const batch=db.batch();
   for (const sw of (s.workers||[])) {
     if (!sw.attended) continue;
-    const already = payments.filter(p=>p.serviceId===serviceId&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
-    if (already < 30) {
-      const ref = db.collection('payments').doc();
-      batch.set(ref, { workerId: sw.id, serviceId, amount: 30, paid: true, paidAt: firebase.firestore.FieldValue.serverTimestamp() });
-    }
+    const paid=payments.filter(p=>p.serviceId===serviceId&&p.workerId===sw.id&&p.paid).reduce((a,p)=>a+p.amount,0);
+    if (paid<val) batch.set(db.collection('payments').doc(), { workerId:sw.id, serviceId, amount:val, paid:true, paidAt:firebase.firestore.FieldValue.serverTimestamp() });
   }
-  await batch.commit();
-  toast('Pagamentos registados ✓');
+  await batch.commit(); toast('Pagamentos registados ✓');
 }
 
-// ── ADMIN: REQUESTS ───────────────────────────────────────────────────────────
-function renderRequests() {
-  const pending  = requests.filter(r=>r.status==='pending');
-  const resolved = requests.filter(r=>r.status==='resolved');
-  document.getElementById('tab-requests').innerHTML = `
-    <div class="page-hd"><div class="page-title">Pedidos de alteração<small>Mensagens dos tarefeiros</small></div></div>
-    ${pending.length ? `<div class="section-lbl">Pendentes (${pending.length})</div>${pending.map(reqCard).join('')}` : '<div style="color:var(--muted);font-size:13px;padding:8px 0;margin-bottom:8px">Sem pedidos pendentes ✓</div>'}
-    ${resolved.length ? `<div class="section-lbl">Resolvidos</div>${resolved.slice(0,10).map(reqCard).join('')}` : ''}
-  `;
-}
-
-function reqCard(r) {
-  const w = workerById(r.workerId);
-  return `<div class="req-card">
-    <div class="req-hd">
-      <div>
-        <div class="req-name">${r.workerName||w?.name||'?'}</div>
-        <div class="req-date">${fmtTs(r.createdAt)}</div>
-      </div>
-      <span class="badge ${r.status==='pending'?'badge-yellow':'badge-gray'}">${r.status==='pending'?'Pendente':'Resolvido'}</span>
-    </div>
-    <div class="req-msg">${r.message}</div>
-    ${r.adminNote?`<div class="req-admin-note">Nota: ${r.adminNote}</div>`:''}
-    ${r.status==='pending'?`<button class="btn btn-primary btn-sm" onclick="openResolve('${r.id}','${(r.message||'').replace(/'/g,"\\'")}')">Marcar como resolvido</button>`:''}
-  </div>`;
-}
-
-function openResolve(id, msg) {
-  resolvingRequestId = id;
-  document.getElementById('resolve-msg-preview').textContent = msg;
-  document.getElementById('resolve-note').value = '';
-  openM('m-resolve');
-}
-
-async function resolveRequest() {
-  const note = document.getElementById('resolve-note').value.trim();
-  await db.collection('requests').doc(resolvingRequestId).update({
-    status: 'resolved', resolvedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    ...(note ? { adminNote: note } : {})
-  });
-  closeM('m-resolve'); toast('Pedido resolvido ✓');
-}
-
-// ── ADMIN: CONVOKE ────────────────────────────────────────────────────────────
+// ── CONVOKE WHATSAPP ────────────────────────────────────────────────────────
 function openConvoke(serviceId) {
   const s = services.find(x=>x.id===serviceId);
   if (!s?.workers?.length) {
-    document.getElementById('m-convoke-body').innerHTML = '<div style="color:var(--muted);padding:16px">Sem tarefeiros convocados neste serviço.</div>';
+    document.getElementById('m-convoke-body').innerHTML='<div style="color:var(--muted);padding:16px">Sem colaboradores convocados.</div>';
     openM('m-convoke'); return;
   }
-  const msg = `Olá, aqui é o Nicolau (Mira).
+  // Hora de encontro = 1h antes do funeral
+  let meetTime = '';
+  if (s.funeralTime) {
+    const [h,m] = s.funeralTime.split(':').map(Number);
+    const d = new Date(2000,0,1,h,m); d.setHours(d.getHours()-1);
+    meetTime = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
 
-Tens disponibilidade para um serviço amanhã?
+  // Mensagem SEM valor
+  const msg = `Olá, aqui é o Nicolau (Agência Mira).
 
-📍 ${s.location||'A confirmar'}
-🕐 Concentração às ${s.time||'—'} em Penso (centro logístico)
+Tens disponibilidade amanhã para um serviço?
 
-Fato preto, camisa branca, gravata preta.
+👤 ${s.deceased||'—'}
+📍 ${s.location||'A confirmar'}${s.depositTime?`\n⚰️  Depósito: ${s.depositTime}`:''}
+🕐  Funeral: ${s.funeralTime||'A confirmar'}
+🤝  Concentração: ${meetTime||'A confirmar'} em Penso (centro logístico)
 
-Confirmas? 🙏`;
+Fato preto · Camisa branca · Gravata preta · Sapato social
+
+Confirmas disponibilidade? 🙏`;
 
   document.getElementById('m-convoke-body').innerHTML = `
     <div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Mensagem</div>
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Mensagem enviada (sem valor)</div>
       <div class="wa-preview">${msg}</div>
     </div>
     <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Enviar para</div>
-    ${s.workers.map(sw => {
-      const w = workerById(sw.id);
-      const clean = (w?.phone||'').replace(/\s/g,'').replace('+','');
-      const encoded = encodeURIComponent(msg);
+    ${s.workers.map(sw=>{
+      const w=workerById(sw.id);
+      const clean=(w?.phone||'').replace(/\s/g,'').replace('+','');
       return `<div class="wa-row">
         <div class="avatar" style="width:32px;height:32px;font-size:12px">${initials(w?.name||'?')}</div>
         <div style="flex:1;font-weight:500">${w?.name||'?'}</div>
-        ${w?.phone ? `<a class="btn btn-wa btn-sm" href="https://wa.me/${clean}?text=${encoded}" target="_blank">Abrir WA</a>` : '<span style="color:var(--dim);font-size:12px">Sem nº</span>'}
+        <span class="badge ${sw.confirmed?'badge-green':sw.attended?'badge-green':'badge-gray'}" style="margin-right:8px">${sw.attended?'✓ Esteve':sw.confirmed?'Confirmou':'Convocado'}</span>
+        ${w?.phone?`<a class="btn btn-wa btn-sm" href="https://wa.me/${clean}?text=${encodeURIComponent(msg)}" target="_blank">Abrir WA</a>`:'<span style="color:var(--dim);font-size:12px">Sem nº</span>'}
       </div>`;
     }).join('')}
   `;
   openM('m-convoke');
 }
 
-// ── WORKER: MY SERVICES ───────────────────────────────────────────────────────
-function renderMyServices() {
-  // Find worker profile by uid
-  const myProfile = workers.find(w => w.uid === currentUser.uid);
-  const myId = myProfile?.id;
-  const myServices = services.filter(s => (s.workers||[]).some(sw=>sw.id===myId));
+// ── REQUESTS ───────────────────────────────────────────────────────────────
+function renderRequests() {
+  const pending  = requests.filter(r=>r.status==='pending');
+  const resolved = requests.filter(r=>r.status==='resolved');
+  document.getElementById('tab-requests').innerHTML = `
+    <div class="page-hd"><div class="page-title">Pedidos<small>Mensagens dos colaboradores</small></div></div>
+    ${pending.length?`<div class="section-lbl">Pendentes (${pending.length})</div>${pending.map(reqCard).join('')}`:'<div style="color:var(--muted);font-size:13px;padding:8px 0 16px">Sem pedidos pendentes ✓</div>'}
+    ${resolved.length?`<div class="section-lbl">Resolvidos</div>${resolved.slice(0,10).map(reqCard).join('')}`:''}
+  `;
+}
+function reqCard(r) {
+  const w=workerById(r.workerId);
+  return `<div class="req-card">
+    <div class="req-hd">
+      <div><div style="font-weight:600">${r.workerName||w?.name||'?'}</div><div style="font-size:11px;color:var(--muted)">${fmtTs(r.createdAt)}</div></div>
+      <span class="badge ${r.status==='pending'?'badge-yellow':'badge-gray'}">${r.status==='pending'?'Pendente':'Resolvido'}</span>
+    </div>
+    <div class="req-msg">${r.message}</div>
+    ${r.adminNote?`<div style="font-size:12px;color:var(--muted);font-style:italic">Resposta: ${r.adminNote}</div>`:''}
+    ${r.status==='pending'?`<button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="openResolve('${r.id}','${(r.message||'').replace(/'/g,"\\'")}')">Resolver</button>`:''}
+  </div>`;
+}
+function openResolve(id,msg) {
+  resolvingRequestId=id;
+  document.getElementById('resolve-preview').textContent=msg;
+  document.getElementById('resolve-note').value='';
+  openM('m-resolve');
+}
+async function resolveRequest() {
+  const note=document.getElementById('resolve-note').value.trim();
+  await db.collection('requests').doc(resolvingRequestId).update({
+    status:'resolved', resolvedAt:firebase.firestore.FieldValue.serverTimestamp(),
+    ...(note?{adminNote:note}:{})
+  });
+  closeM('m-resolve'); toast('Pedido resolvido ✓');
+}
 
+// ── WORKER PORTAL ──────────────────────────────────────────────────────────
+function myProfile() { return workers.find(w=>w.uid===currentUser.uid); }
+
+function renderMyServices() {
+  const me = myProfile();
+  const myId = me?.id;
+  const myServices = services.filter(s=>(s.workers||[]).some(sw=>sw.id===myId));
   document.getElementById('tab-my-services').innerHTML = `
     <div class="page-hd"><div class="page-title">Os meus serviços</div></div>
-    ${!myId ? '<div class="empty"><div class="empty-icon">⚠️</div><p>Perfil não encontrado.<br>Contacta o administrador.</p></div>' :
-      myServices.length ? myServices.map(s => {
-        const sw = s.workers.find(x=>x.id===myId);
-        return `<div class="my-svc">
-          <div class="my-svc-hd">
-            <div>
-              <div class="my-svc-date">${fmtDate(s.date)}</div>
-              <div class="my-svc-loc">${s.location||'Serviço'}</div>
-              ${s.time?`<div class="my-svc-time">🕐 Concentração às ${s.time} em Penso</div>`:''}
-              ${s.notes?`<div style="font-size:12px;color:var(--muted);margin-top:4px">${s.notes}</div>`:''}
+    ${!myId?'<div class="empty"><div class="empty-icon">⚠️</div><p>Perfil não encontrado.<br>Contacta o administrador.</p></div>':
+    myServices.length ? myServices.map(s=>{
+      const sw=s.workers.find(x=>x.id===myId);
+      const val=svcValue(s);
+      return `<div class="my-svc">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+          <div>
+            <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin-bottom:3px">${fmtDate(s.date)}</div>
+            <div class="my-svc-name">${s.deceased||'Serviço'}</div>
+            <div class="my-svc-meta">
+              ${s.location?`<span>📍 ${s.location}</span>`:''}
+              ${s.depositTime?`<span>⚰️ Depósito ${s.depositTime}</span>`:''}
+              ${s.funeralTime?`<span>🕐 Funeral ${s.funeralTime}</span>`:''}
             </div>
-            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-              ${sw.attended ? '<span class="badge badge-green">✓ Esteve presente</span>' :
-                sw.confirmed ? '<span class="badge badge-yellow">Confirmado</span>' :
-                `<button class="btn btn-green btn-sm" onclick="workerConfirm('${s.id}','${myId}')">Confirmar disponibilidade</button>`}
-            </div>
+            ${sw.attended?`<span class="badge badge-green" style="margin-top:4px">✓ Esteve presente · <span style="font-family:var(--mono)">${val}€</span></span>`:
+              sw.confirmed?`<span class="badge badge-yellow">Confirmado</span>`:
+              `<button class="btn btn-green btn-sm" style="margin-top:6px" onclick="workerConfirm('${s.id}','${myId}')">Confirmar disponibilidade</button>`}
           </div>
-        </div>`;
-      }).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Ainda não tens serviços atribuídos.</p></div>'}
+        </div>
+      </div>`;
+    }).join('') : '<div class="empty"><div class="empty-icon">📋</div><p>Ainda não tens serviços atribuídos.</p></div>'}
   `;
 }
 
 async function workerConfirm(serviceId, workerId) {
-  const s = services.find(x=>x.id===serviceId);
-  const updated = (s.workers||[]).map(sw =>
-    sw.id === workerId ? {...sw, confirmed: true} : sw
-  );
-  await db.collection('services').doc(serviceId).update({ workers: updated });
+  const s=services.find(x=>x.id===serviceId);
+  await db.collection('services').doc(serviceId).update({
+    workers:(s.workers||[]).map(sw=>sw.id===workerId?{...sw,confirmed:true}:sw)
+  });
   toast('Disponibilidade confirmada ✓');
 }
 
-// ── WORKER: MY PAYMENTS ───────────────────────────────────────────────────────
 function renderMyPayments() {
-  const myProfile = workers.find(w=>w.uid===currentUser.uid);
-  const myId = myProfile?.id;
-  const debt = myId ? calcDebt(myId) : 0;
-  const myPayments = payments.filter(p=>p.workerId===myId&&p.paid)
-    .sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
-  const attended = services.flatMap(s=>(s.workers||[]).filter(sw=>sw.id===myId&&sw.attended).map(()=>s)).length;
-
+  const me=myProfile(); const myId=me?.id;
+  const debt=myId?calcDebt(myId):0;
+  const myPay=payments.filter(p=>p.workerId===myId&&p.paid).sort((a,b)=>(b.paidAt?.seconds||0)-(a.paidAt?.seconds||0));
+  const attended=services.flatMap(s=>(s.workers||[]).filter(sw=>sw.id===myId&&sw.attended).map(()=>s));
+  const totalEarned=attended.reduce((a,s)=>a+svcValue(s),0);
   document.getElementById('tab-my-payments').innerHTML = `
     <div class="page-hd"><div class="page-title">Os meus pagamentos</div></div>
     <div class="stats">
-      <div class="stat"><div class="stat-val">${attended}</div><div class="stat-lbl">Serviços feitos</div></div>
+      <div class="stat"><div class="stat-val">${attended.length}</div><div class="stat-lbl">Serviços feitos</div></div>
       <div class="stat"><div class="stat-val" style="color:${debt>0?'var(--red)':'var(--green)'}">${debt>0?debt+'€':'0€'}</div><div class="stat-lbl">${debt>0?'Por receber':'Em dia ✓'}</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--green)">${myPayments.reduce((a,p)=>a+p.amount,0)}€</div><div class="stat-lbl">Total recebido</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--green)">${myPay.reduce((a,p)=>a+p.amount,0)}€</div><div class="stat-lbl">Total recebido</div></div>
     </div>
     <div class="section-lbl">Histórico</div>
     <div class="card">
-      ${myPayments.length ? myPayments.map(p=>{
+      ${myPay.length ? myPay.map(p=>{
         const s=services.find(x=>x.id===p.serviceId);
         return `<div class="pay-row">
           <div class="pay-info">
-            <div class="pay-name">${s?s.location||'Serviço':'Serviço'}</div>
+            <div class="pay-name">${s?.deceased||'Serviço'}</div>
             <div class="pay-detail">${s?fmtDate(s.date):''} · recebido em ${fmtTs(p.paidAt)}</div>
           </div>
           <div class="pay-amt ok">${p.amount}€</div>
@@ -1019,51 +932,43 @@ function renderMyPayments() {
   `;
 }
 
-// ── WORKER: MY REQUESTS ───────────────────────────────────────────────────────
 function renderMyRequests() {
-  const myProfile = workers.find(w=>w.uid===currentUser.uid);
-  const myId = myProfile?.id;
-  const myRequests = requests.filter(r=>r.workerId===myId||r.workerUid===currentUser.uid)
+  const me=myProfile(); const myId=me?.id;
+  const myReqs=requests.filter(r=>r.workerId===myId||r.workerUid===currentUser.uid)
     .sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-
   document.getElementById('tab-my-requests').innerHTML = `
-    <div class="page-hd"><div class="page-title">Pedido de alteração<small>Envia uma mensagem ao administrador</small></div></div>
+    <div class="page-hd"><div class="page-title">Pedido de alteração</div></div>
     <div class="card" style="margin-bottom:20px">
-      <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Usa este formulário para comunicar indisponibilidades, alterações de dados ou qualquer outra situação.</div>
-      <div class="field" style="margin-bottom:10px"><label>Mensagem</label><textarea id="req-msg" placeholder="ex: Não posso no dia 15/06. Quero alterar o meu contacto para..."></textarea></div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Envia uma mensagem ao administrador — indisponibilidade, alteração de dados, ou outra situação.</div>
+      <div class="field" style="margin-bottom:10px"><label>Mensagem</label><textarea id="req-msg" placeholder="ex: Não posso no dia 20/06. Quero alterar o meu contacto para..."></textarea></div>
       <button class="btn btn-primary" onclick="submitRequest('${myId||''}')">Enviar pedido</button>
     </div>
-    ${myRequests.length ? `<div class="section-lbl">Os meus pedidos</div>${myRequests.map(r=>`
+    ${myReqs.length?`<div class="section-lbl">Os meus pedidos</div>${myReqs.map(r=>`
       <div class="req-card">
-        <div class="req-hd">
-          <div class="req-date">${fmtTs(r.createdAt)}</div>
+        <div class="req-hd"><div style="font-size:11px;color:var(--muted)">${fmtTs(r.createdAt)}</div>
           <span class="badge ${r.status==='pending'?'badge-yellow':'badge-gray'}">${r.status==='pending'?'Pendente':'Resolvido'}</span>
         </div>
         <div class="req-msg">${r.message}</div>
-        ${r.adminNote?`<div class="req-admin-note">Resposta: ${r.adminNote}</div>`:''}
-      </div>`).join('')}` : ''}
+        ${r.adminNote?`<div style="font-size:12px;color:var(--muted);font-style:italic">Resposta: ${r.adminNote}</div>`:''}
+      </div>`).join('')}`:''}
   `;
 }
 
 async function submitRequest(workerId) {
-  const msg = document.getElementById('req-msg').value.trim();
-  if (!msg) { toast('Escreve uma mensagem'); return; }
-  const myProfile = workers.find(w=>w.uid===currentUser.uid);
+  const msg=document.getElementById('req-msg').value.trim();
+  if(!msg){toast('Escreve uma mensagem');return;}
+  const me=myProfile();
   await db.collection('requests').add({
-    workerId: workerId || myProfile?.id || '',
-    workerUid: currentUser.uid,
-    workerName: myProfile?.name || currentUser.displayName || currentUser.email,
-    message: msg, status: 'pending',
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    workerId:workerId||me?.id||'', workerUid:currentUser.uid,
+    workerName:me?.name||currentUser.displayName||currentUser.email,
+    message:msg, status:'pending', createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
-  document.getElementById('req-msg').value = '';
+  document.getElementById('req-msg').value='';
   toast('Pedido enviado ✓');
 }
 
-// ── CLOSE MODALS ON OVERLAY CLICK ────────────────────────────────────────────
-document.querySelectorAll('.overlay').forEach(o => {
-  o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); });
-});
+// ── CLOSE ON OVERLAY CLICK ─────────────────────────────────────────────────
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 </script>
 </body>
 </html>
