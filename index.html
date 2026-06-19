@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIRA · Tarefeiros</title>
+<title>MMIRA-RH</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -253,14 +253,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 <body>
 
 <div id="loading-screen">
-  <div class="logo-lg">MIRA <span>· Tarefeiros</span></div>
+  <div class="logo-lg">MMIRA<span>-RH</span></div>
   <div class="spinner"></div>
 </div>
 
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo">MIRA <span>· Tarefeiros</span></div>
-    <div class="login-sub">Agência Funerária Mira — Melgaço</div>
+    <div class="login-logo">MMIRA<span>-RH</span></div>
+    <div class="login-sub">Agência Funerária Mira</div>
     <div class="lf"><label>Email</label><input type="email" id="l-email" autocomplete="username"></div>
     <div class="lf"><label>Password</label><input type="password" id="l-pass" autocomplete="current-password"></div>
     <div class="login-err" id="l-err"></div>
@@ -270,7 +270,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 
 <div id="app">
   <header class="topbar">
-    <div class="logo">MIRA <span>· Tarefeiros</span></div>
+    <div class="logo">MMIRA<span>-RH</span></div>
     <div class="user-badge">
       <strong id="ub-name" style="font-size:13px"></strong>
       <span class="role-pill" id="ub-role"></span>
@@ -462,7 +462,7 @@ function subOneHour(t) {
 setTimeout(()=>{
   const ls=document.getElementById('loading-screen');
   if(ls&&ls.style.display!=='none'){
-    ls.innerHTML='<div style="text-align:center"><div style="color:#c8a96e;font-size:20px;font-weight:700;letter-spacing:.1em;margin-bottom:16px">MIRA · Tarefeiros</div><div style="color:#e05555;font-size:13px;margin-bottom:8px">Não foi possível ligar ao servidor.</div><div style="color:#777;font-size:12px;margin-bottom:20px">Verifica a ligação à internet e recarrega.</div><button onclick="location.reload()" style="padding:8px 20px;background:#c8a96e;color:#0f0f0f;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600">Recarregar</button></div>';
+    ls.innerHTML='<div style="text-align:center"><div style="color:#c8a96e;font-size:20px;font-weight:700;letter-spacing:.1em;margin-bottom:16px">MMIRA-RH</div><div style="color:#e05555;font-size:13px;margin-bottom:8px">Não foi possível ligar ao servidor.</div><div style="color:#777;font-size:12px;margin-bottom:20px">Verifica a ligação à internet e recarrega.</div><button onclick="location.reload()" style="padding:8px 20px;background:#c8a96e;color:#0f0f0f;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600">Recarregar</button></div>';
   }
 },8000);
 
