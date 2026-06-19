@@ -597,10 +597,15 @@ const DAYS = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
 
 function renderDash() {
   const today = toYMD(new Date());
-  const todaySvcs = services.filter(s=>s.date===today);
-  const nextSvc   = [...services].reverse().find(s=>s.date>today);
-  const featured  = todaySvcs.length ? todaySvcs : (nextSvc?[nextSvc]:[]);
+  const yesterday = toYMD(new Date(Date.now()-86400000));
 
+  // Featured: today, or most recent past (last 3 days), or next future
+  const todaySvcs   = services.filter(s=>s.date===today);
+  const recentSvcs  = services.filter(s=>s.date>=yesterday&&s.date<today);
+  const nextSvc     = [...services].reverse().find(s=>s.date>today);
+  const featured    = todaySvcs.length ? todaySvcs : recentSvcs.length ? recentSvcs : nextSvc ? [nextSvc] : [];
+
+  // Alerts
   const unconfirmed = [];
   services.filter(s=>s.date>=today).forEach(s=>{
     (s.workers||[]).forEach(sw=>{
@@ -608,12 +613,34 @@ function renderDash() {
     });
   });
 
-  const totalDebt = workers.reduce((a,w)=>a+calcDebt(w.id),0);
+  // Stats
   const now = new Date();
-  const monthStart = toYMD(new Date(now.getFullYear(),now.getMonth(),1));
-  const monthSvcs  = services.filter(s=>s.date>=monthStart).length;
-  const monthPaid  = payments.filter(p=>p.paid&&p.paidAt?.toDate&&p.paidAt.toDate()>=new Date(monthStart)).reduce((a,p)=>a+p.amount,0);
-  const pending    = requests.filter(r=>r.status==='pending').length;
+  const monthStart  = toYMD(new Date(now.getFullYear(),now.getMonth(),1));
+  const lastMStart  = toYMD(new Date(now.getFullYear(),now.getMonth()-1,1));
+  const lastMEnd    = toYMD(new Date(now.getFullYear(),now.getMonth(),0));
+  const next7end    = toYMD(new Date(Date.now()+7*86400000));
+
+  const monthSvcs   = services.filter(s=>s.date>=monthStart).length;
+  const lastMSvcs   = services.filter(s=>s.date>=lastMStart&&s.date<=lastMEnd).length;
+  const next7Svcs   = services.filter(s=>s.date>today&&s.date<=next7end).length;
+  const totalDebt   = workers.reduce((a,w)=>a+calcDebt(w.id),0);
+  const monthPaid   = payments.filter(p=>p.paid&&p.paidAt?.toDate&&p.paidAt.toDate()>=new Date(monthStart)).reduce((a,p)=>a+p.amount,0);
+  const totalPaid   = payments.filter(p=>p.paid).reduce((a,p)=>a+p.amount,0);
+  const pending     = requests.filter(r=>r.status==='pending').length;
+
+  // Top worker
+  const workerSvcs = workers.map(w=>({
+    w, cnt: services.filter(s=>(s.workers||[]).some(sw=>sw.id===w.id&&sw.attended)).length
+  })).sort((a,b)=>b.cnt-a.cnt);
+  const topWorker = workerSvcs[0];
+
+  // Confirmation rate (last 30 days)
+  const last30 = toYMD(new Date(Date.now()-30*86400000));
+  let convoked=0, confirmed=0;
+  services.filter(s=>s.date>=last30).forEach(s=>{
+    (s.workers||[]).forEach(sw=>{ convoked++; if(sw.confirmed||sw.attended) confirmed++; });
+  });
+  const confRate = convoked>0 ? Math.round(confirmed/convoked*100) : null;
 
   document.getElementById('tab-dash').innerHTML = `
     <div class="page-hd">
@@ -621,6 +648,7 @@ function renderDash() {
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
     <div class="dash-layout">
+
     <div class="dash-left">
       <div class="section-lbl" style="margin-top:0">Agenda</div>
       <div class="cal-wrap">
@@ -638,75 +666,123 @@ function renderDash() {
         <div id="cal-body"></div>
       </div>
     </div>
+
     <div class="dash-right">
 
-    ${featured.length ? featured.map(s=>{
-      const label = s.date===today ? 'Hoje' : `Próximo · ${fmtDate(s.date)}`;
-      return `<div class="dash-today">
-        <div class="dash-today-head">
-          <div>
-            <div class="dash-today-label">${label}</div>
-            <div class="dash-today-name">${s.deceased||'Serviço'}</div>
-            <div class="dash-today-meta">
-              ${s.location?`<span>📍 ${s.location}</span>`:''}
-              ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
-              ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
-
+      ${featured.length ? featured.map(s=>{
+        const isPast   = s.date < today;
+        const isToday  = s.date === today;
+        const label    = isToday ? 'Hoje' : isPast ? `Recente · ${fmtDate(s.date)}` : `Próximo · ${fmtDate(s.date)}`;
+        return `<div class="dash-today" style="${isPast?'opacity:.8':''}">
+          <div class="dash-today-head">
+            <div>
+              <div class="dash-today-label">${label}</div>
+              <div class="dash-today-name">${s.deceased||'Serviço'}</div>
+              <div class="dash-today-meta">
+                ${s.location?`<span>📍 ${s.location}</span>`:''}
+                ${s.depositTime?`<span>⚰️ ${s.depositTime}</span>`:''}
+                ${s.funeralTime?`<span>🕐 ${s.funeralTime}</span>`:''}
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap">
+              <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')" title="WhatsApp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
+              <button class="btn btn-ghost btn-sm" onclick="openMeetModal('${s.id}')">Encontros</button>
+              <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
             </div>
           </div>
-          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap">
-            <button class="btn btn-wa btn-sm" onclick="openConvoke('${s.id}')" title="Convocar via WhatsApp"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
-            <button class="btn btn-ghost btn-sm" onclick="openMeetModal('${s.id}')">Encontros</button>
-            <button class="btn btn-ghost btn-sm" onclick="openDetail('${s.id}')">Detalhes</button>
+          <div class="dash-colabs">
+            ${(s.workers||[]).length ? s.workers.map(sw=>{
+              const w=workerById(sw.id);
+              const meet=sw.meetTime||subOneHour(s.funeralTime)||'';
+              const loc=sw.meetLocation||'Penso';
+              return `<div class="dash-colab-row">
+                <div class="avatar" style="width:32px;height:32px;font-size:11px;flex-shrink:0">${initials(w?.name||'?')}</div>
+                <div style="flex:1;min-width:0">
+                  <div class="dash-colab-name">${w?.name||'?'}</div>
+                  <div class="dash-colab-meet">${meet?'🕐 '+meet+' ':''} ${loc?'📍 '+loc:''}</div>
+                </div>
+                <div class="dash-colab-actions">
+                  ${sw.attended?'<span class="badge badge-green">✓ Esteve</span>':
+                    sw.unavailable?'<span class="badge badge-red">Indisponível</span>':
+                    sw.confirmed?`<span class="badge badge-yellow">Confirmou</span>
+                      <button class="btn btn-green btn-xs" onclick="setStatus('${s.id}','${sw.id}','attended',true)">✓ Esteve</button>`:
+                    `<button class="btn btn-yellow btn-xs" onclick="setStatus('${s.id}','${sw.id}','confirmed',true)">Confirmou</button>
+                     <button class="btn btn-orange btn-xs" onclick="setStatus('${s.id}','${sw.id}','unavailable',true)">Indisponível</button>`}
+                </div>
+              </div>`;
+            }).join('') : '<div style="padding:12px 0;color:var(--dim);font-size:13px">Sem colaboradores convocados.</div>'}
           </div>
-        </div>
-        <div class="dash-colabs">
-          ${(s.workers||[]).length ? s.workers.map(sw=>{
-            const w=workerById(sw.id);
-            const meet=sw.meetTime||subOneHour(s.funeralTime)||'';
-            const loc=sw.meetLocation||'Penso';
-            return `<div class="dash-colab-row">
-              <div class="avatar" style="width:32px;height:32px;font-size:11px;flex-shrink:0">${initials(w?.name||'?')}</div>
-              <div style="flex:1;min-width:0">
-                <div class="dash-colab-name">${w?.name||'?'}</div>
-                <div class="dash-colab-meet">${meet?`🕐 ${meet} `:''} ${loc?`📍 ${loc}`:''}</div>
-              </div>
-              <div class="dash-colab-actions">
-                ${sw.attended?'<span class="badge badge-green">✓ Esteve</span>':
-                  sw.unavailable?'<span class="badge badge-red">Indisponível</span>':
-                  sw.confirmed?`<span class="badge badge-yellow">Confirmou</span>
-                    <button class="btn btn-green btn-xs" onclick="setStatus('${s.id}','${sw.id}','attended',true)">✓ Esteve</button>`:
-                  `<button class="btn btn-yellow btn-xs" onclick="setStatus('${s.id}','${sw.id}','confirmed',true)">Confirmou</button>
-                   <button class="btn btn-orange btn-xs" onclick="setStatus('${s.id}','${sw.id}','unavailable',true)">Indisponível</button>`}
-              </div>
-            </div>`;
-          }).join('') : '<div style="padding:14px 0;color:var(--dim);font-size:13px">Sem colaboradores convocados.</div>'}
-        </div>
-      </div>`;
-    }).join('') : '<div style="color:var(--muted);font-size:13px;margin-bottom:16px">Sem serviços próximos.</div>'}
+        </div>`;
+      }).join('') : '<div style="color:var(--muted);font-size:13px;margin-bottom:16px;padding:8px 0">Sem serviços recentes ou próximos.</div>'}
 
-    ${unconfirmed.length?`<div class="alert-card alert-warn">
-      <span style="font-size:18px">⚠️</span>
-      <div><div style="font-weight:600;font-size:13px">Sem confirmação</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">${unconfirmed.map(x=>`${x.worker.name} · ${x.service.deceased||fmtDate(x.service.date)}`).join(' · ')}</div>
-      </div></div>`:''}
-    ${pending>0?`<div class="alert-card alert-info" style="cursor:pointer" onclick="showTab('requests')">
-      <span style="font-size:18px">💬</span>
-      <div><div style="font-weight:600;font-size:13px">${pending} pedido${pending>1?'s':''} pendente${pending>1?'s':''}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">Clica para ver</div></div></div>`:''}
+      ${unconfirmed.length?`<div class="alert-card alert-warn">
+        <span style="font-size:18px">⚠️</span>
+        <div><div style="font-weight:600;font-size:13px">Sem confirmação</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">${unconfirmed.map(x=>`${x.worker.name} · ${x.service.deceased||fmtDate(x.service.date)}`).join(' · ')}</div>
+        </div></div>`:''}
 
-    <div class="section-lbl">Este mês</div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-val">${monthSvcs}</div><div class="stat-lbl">Serviços</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--red)">${totalDebt}€</div><div class="stat-lbl">Em dívida</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--green)">${monthPaid}€</div><div class="stat-lbl">Pago este mês</div></div>
-      <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Colaboradores</div></div>
-    </div>
+      ${pending>0?`<div class="alert-card alert-info" style="cursor:pointer" onclick="showTab('requests')">
+        <span style="font-size:18px">💬</span>
+        <div><div style="font-weight:600;font-size:13px">${pending} pedido${pending>1?'s':''} pendente${pending>1?'s':''}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Clica para ver</div></div></div>`:''}
+
+      <div class="section-lbl">Este mês</div>
+      <div class="stats-row" style="grid-template-columns:repeat(2,1fr)">
+        <div class="stat">
+          <div class="stat-val">${monthSvcs}</div>
+          <div class="stat-lbl">Serviços</div>
+          ${lastMSvcs>0?`<div style="font-size:11px;color:var(--muted);margin-top:4px">${monthSvcs>=lastMSvcs?'▲':'▼'} ${lastMSvcs} mês anterior</div>`:''}
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:var(--red)">${totalDebt}€</div>
+          <div class="stat-lbl">Em dívida</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:var(--green)">${monthPaid}€</div>
+          <div class="stat-lbl">Pago este mês</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:var(--accent)">${next7Svcs}</div>
+          <div class="stat-lbl">Próx. 7 dias</div>
+        </div>
+      </div>
+
+      <div class="section-lbl">Indicadores</div>
+      <div class="stats-row" style="grid-template-columns:repeat(2,1fr)">
+        <div class="stat">
+          <div class="stat-val" style="color:var(--green)">${totalPaid}€</div>
+          <div class="stat-lbl">Total pago (acum.)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:${confRate===null?'var(--muted)':confRate>=80?'var(--green)':confRate>=50?'var(--yellow)':'var(--red)'}">${confRate!==null?confRate+'%':'—'}</div>
+          <div class="stat-lbl">Taxa confirmação (30d)</div>
+        </div>
+        ${topWorker&&topWorker.cnt>0?`
+        <div class="stat" style="grid-column:span 2">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="avatar" style="width:34px;height:34px;font-size:12px;flex-shrink:0">${initials(topWorker.w.name)}</div>
+            <div>
+              <div class="stat-val" style="font-size:16px">${topWorker.w.name.split(' ')[0]}</div>
+              <div class="stat-lbl">Mais activo · ${topWorker.cnt} serviço${topWorker.cnt!==1?'s':''}</div>
+            </div>
+          </div>
+        </div>`:''}
+        <div class="stat">
+          <div class="stat-val">${workers.length}</div>
+          <div class="stat-lbl">Colaboradores</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">${services.length}</div>
+          <div class="stat-lbl">Total serviços</div>
+        </div>
+      </div>
+
     </div>
     </div>
   `;
   renderCal();
 }
+
 
 function setCalView(v) { calView=v; renderDash(); }
 
