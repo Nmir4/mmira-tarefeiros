@@ -54,7 +54,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .nav-btn:hover{color:var(--text)}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .notif-dot{position:absolute;top:7px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--red)}
-.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:1100px;width:100%;margin:0}
+.content{flex:1;overflow-y:auto;padding:20px 16px;max-width:1200px;width:100%;margin:0 auto}
 .view{display:none}.view.active{display:block}
 
 .page-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
@@ -106,6 +106,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--f
 .week-name{font-weight:600;font-size:13px}
 .week-loc{font-size:12px;color:var(--muted);margin-top:1px}
 .week-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+
+/* ── DASHBOARD LAYOUT ── */
+.dash-layout{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+.dash-left{min-width:0}
+.dash-right{min-width:0}
+@media(max-width:800px){.dash-layout{grid-template-columns:1fr}}
 
 /* ── CALENDAR ── */
 .cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:16px;width:100%}
@@ -614,6 +620,25 @@ function renderDash() {
       <div class="page-title">Painel Geral</div>
       <button class="btn btn-primary" onclick="openServiceModal()">+ Novo Serviço</button>
     </div>
+    <div class="dash-layout">
+    <div class="dash-left">
+      <div class="section-lbl" style="margin-top:0">Agenda</div>
+      <div class="cal-wrap">
+        <div class="cal-nav">
+          <button class="btn btn-ghost btn-sm" onclick="calPrev()">‹</button>
+          <div class="cal-title" id="cal-title"></div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <div class="cal-toggle">
+              <button class="cal-toggle-btn ${calView==='month'?'active':''}" onclick="setCalView('month')">Mês</button>
+              <button class="cal-toggle-btn ${calView==='week'?'active':''}" onclick="setCalView('week')">Sem.</button>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="calNext()">›</button>
+          </div>
+        </div>
+        <div id="cal-body"></div>
+      </div>
+    </div>
+    <div class="dash-right">
 
     ${featured.length ? featured.map(s=>{
       const label = s.date===today ? 'Hoje' : `Próximo · ${fmtDate(s.date)}`;
@@ -670,28 +695,14 @@ function renderDash() {
       <div><div style="font-weight:600;font-size:13px">${pending} pedido${pending>1?'s':''} pendente${pending>1?'s':''}</div>
       <div style="font-size:12px;color:var(--muted);margin-top:2px">Clica para ver</div></div></div>`:''}
 
-    <div class="section-lbl">Agenda</div>
-    <div class="cal-wrap">
-      <div class="cal-nav">
-        <button class="btn btn-ghost btn-sm" onclick="calPrev()">‹</button>
-        <div class="cal-title" id="cal-title"></div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div class="cal-toggle">
-            <button class="cal-toggle-btn ${calView==='month'?'active':''}" onclick="setCalView('month')">Mês</button>
-            <button class="cal-toggle-btn ${calView==='week'?'active':''}" onclick="setCalView('week')">Semana</button>
-          </div>
-          <button class="btn btn-ghost btn-sm" onclick="calNext()">›</button>
-        </div>
-      </div>
-      <div id="cal-body"></div>
-    </div>
-
     <div class="section-lbl">Este mês</div>
     <div class="stats-row">
       <div class="stat"><div class="stat-val">${monthSvcs}</div><div class="stat-lbl">Serviços</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--red)">${totalDebt}€</div><div class="stat-lbl">Em dívida</div></div>
       <div class="stat"><div class="stat-val" style="color:var(--green)">${monthPaid}€</div><div class="stat-lbl">Pago este mês</div></div>
       <div class="stat"><div class="stat-val">${workers.length}</div><div class="stat-lbl">Colaboradores</div></div>
+    </div>
+    </div>
     </div>
   `;
   renderCal();
